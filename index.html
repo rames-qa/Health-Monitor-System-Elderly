@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Elderly Health Monitor</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body {
+    font-family: Arial;
+    background: #f1f5f9;
+    margin: 0;
+}
+
+.header {
+    background: linear-gradient(135deg, #2563eb, #dbeafe);
+    padding: 20px;
+    text-align: center;
+    color: #1e293b;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-size: 18px;
+}
+
+.alert {
+    padding: 10px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.safe { background: #dcfce7; color: #166534; }
+.danger { background: #fee2e2; color: #991b1b; }
+
+.controls {
+    text-align: center;
+    margin: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.start { background: #16a34a; color: white; }
+.stop { background: #dc2626; color: white; }
+
+canvas {
+    margin: 20px;
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">🏥 AI Elderly Health Monitor</div>
+
+<div class="container">
+    <div class="card">❤️ Heart Rate<br><span id="heart">--</span> BPM</div>
+    <div class="card">🌡 Temperature<br><span id="temp">--</span> °C</div>
+    <div class="card">🫁 Oxygen<br><span id="oxygen">--</span> %</div>
+    <div class="card" id="status">System Ready</div>
+</div>
+
+<div class="controls">
+    <button class="start" onclick="start()">▶ Start Monitoring</button>
+    <button class="stop" onclick="stop()">⛔ Stop Monitoring</button>
+</div>
+
+<div id="alert" class="alert safe">Waiting for data...</div>
+
+<canvas id="chart" height="120"></canvas>
+
+<script>
+let running = false;
+let heartData = [];
+let oxygenData = [];
+let interval;
+
+const ctx = document.getElementById('chart').getContext('2d');
+
+const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            {
+                label: 'Heart Rate',
+                borderColor: 'blue',
+                data: []
+            },
+            {
+                label: 'Oxygen',
+                borderColor: 'green',
+                data: []
+            }
+        ]
+    }
+});
+
+function start() {
+    running = true;
+
+    interval = setInterval(() => {
+        let heart = Math.floor(Math.random() * 30) + 70;
+        let temp = (Math.random() * 2 + 36).toFixed(1);
+        let oxygen = Math.floor(Math.random() * 12) + 88;
+
+        document.getElementById("heart").innerText = heart;
+        document.getElementById("temp").innerText = temp;
+        document.getElementById("oxygen").innerText = oxygen;
+
+        chart.data.labels.push("");
+        chart.data.datasets[0].data.push(heart);
+        chart.data.datasets[1].data.push(oxygen);
+
+        if (chart.data.labels.length > 20) {
+            chart.data.labels.shift();
+            chart.data.datasets[0].data.shift();
+            chart.data.datasets[1].data.shift();
+        }
+
+        chart.update();
+
+        let alertBox = document.getElementById("alert");
+
+        if (oxygen < 95) {
+            alertBox.className = "alert danger";
+            alertBox.innerText = "🚨 LOW OXYGEN ALERT!";
+            document.getElementById("status").innerText = "Critical Condition";
+        } else {
+            alertBox.className = "alert safe";
+            alertBox.innerText = "✅ Patient Stable";
+            document.getElementById("status").innerText = "Normal";
+        }
+
+    }, 1000);
+}
+
+function stop() {
+    running = false;
+    clearInterval(interval);
+    document.getElementById("status").innerText = "Stopped";
+}
+</script>
+
+</body>
+</html>
