@@ -1,132 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Elderly Health Monitor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Elderly Health Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --danger: #dc2626;
+            --success: #16a34a;
+            --bg: #f1f5f9;
+            --text: #1e293b;
+        }
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: Arial, sans-serif;
-}
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
 
-body{
-    background:#f1f5f9;
-}
+        .header {
+            background: linear-gradient(135deg, var(--primary), #dbeafe);
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-.header{
-    background:linear-gradient(135deg,#2563eb,#dbeafe);
-    padding:20px;
-    text-align:center;
-    font-size:28px;
-    font-weight:bold;
-    color:#1e293b;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    padding:25px;
-}
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
 
-.card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-    font-size:20px;
-    font-weight:bold;
-}
+        .card:hover {
+            transform: translateY(-5px);
+        }
 
-.value{
-    display:block;
-    margin-top:10px;
-    font-size:30px;
-    color:#2563eb;
-}
+        .card-label {
+            font-size: 14px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
 
-.controls{
-    text-align:center;
-    margin:20px;
-}
+        .value {
+            display: block;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+        }
 
-button{
-    padding:12px 25px;
-    margin:5px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-}
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.start{
-    background:#16a34a;
-    color:white;
-}
+        button {
+            padding: 12px 28px;
+            margin: 5px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
 
-.stop{
-    background:#dc2626;
-    color:white;
-}
+        button:active { transform: scale(0.98); }
 
-.alert{
-    width:90%;
-    margin:auto;
-    padding:15px;
-    border-radius:12px;
-    text-align:center;
-    font-weight:bold;
-    margin-bottom:20px;
-}
+        .btn-start { background: var(--success); color: white; }
+        .btn-stop { background: var(--danger); color: white; }
 
-.safe{
-    background:#dcfce7;
-    color:#166534;
-}
+        .alert {
+            width: 90%;
+            max-width: 1150px;
+            margin: 0 auto 25px auto;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+        }
 
-.danger{
-    background:#fee2e2;
-    color:#991b1b;
-}
+        .safe { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .danger { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
 
-.chart-box{
-    width:95%;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-    margin-bottom:30px;
-}
-</style>
+        .chart-box {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="header">🏥 AI Elderly Health Monitor</div>
 
 <div class="container">
-    <div class="card">❤️ Heart Rate <span class="value" id="heart">--</span></div>
-    <div class="card">🌡 Temperature <span class="value" id="temp">--</span></div>
-    <div class="card">🫁 Oxygen <span class="value" id="oxygen">--</span></div>
-    <div class="card">📊 Status <span class="value" id="status">Ready</span></div>
+    <div class="card">
+        <span class="card-label">❤️ Heart Rate</span>
+        <span class="value" id="heart">--</span>
+    </div>
+    <div class="card">
+        <span class="card-label">🌡 Temperature</span>
+        <span class="value" id="temp">--</span>
+    </div>
+    <div class="card">
+        <span class="card-label">🫁 Oxygen</span>
+        <span class="value" id="oxygen">--</span>
+    </div>
+    <div class="card">
+        <span class="card-label">📊 Status</span>
+        <span class="value" id="status" style="font-size: 24px;">Ready</span>
+    </div>
 </div>
 
 <div class="controls">
-    <button class="start" onclick="startMonitoring()">▶ Start Monitoring</button>
-    <button class="stop" onclick="stopMonitoring()">⛔ Stop Monitoring</button>
+    <button class="btn-start" onclick="startMonitoring()">▶ Start Monitoring</button>
+    <button class="btn-stop" onclick="stopMonitoring()">⛔ Stop Monitoring</button>
 </div>
 
-<div id="alert" class="alert safe">Waiting for monitoring...</div>
+<div id="alert" class="alert safe">Waiting for data...</div>
 
 <div class="chart-box">
     <canvas id="healthChart"></canvas>
@@ -134,89 +156,93 @@ button{
 
 <script>
 let interval = null;
-
 const ctx = document.getElementById("healthChart").getContext("2d");
 
-const chart = new Chart(ctx,{
-    type:"line",
-    data:{
-        labels:[],
-        datasets:[
+const chart = new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: [],
+        datasets: [
             {
-                label:"Heart Rate",
-                data:[],
-                borderColor:"blue",
-                borderWidth:3,
-                fill:false,
-                tension:0.3
+                label: "Heart Rate (BPM)",
+                data: [],
+                borderColor: "#2563eb",
+                backgroundColor: "rgba(37, 99, 235, 0.1)",
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
             },
             {
-                label:"Oxygen Level",
-                data:[],
-                borderColor:"green",
-                borderWidth:3,
-                fill:false,
-                tension:0.3
+                label: "Oxygen Level (%)",
+                data: [],
+                borderColor: "#16a34a",
+                backgroundColor: "rgba(22, 163, 74, 0.1)",
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
             }
         ]
     },
-    options:{
-        responsive:true,
-        animation:false,
-        scales:{
-            y:{
-                beginAtZero:false
-            }
+    options: {
+        responsive: true,
+        scales: {
+            y: { beginAtZero: false }
         }
     }
 });
 
-function startMonitoring(){
+function startMonitoring() {
+    if (interval) return; // Prevent multiple instances
 
-    if(interval) return;
+    document.getElementById("status").innerText = "Monitoring";
+    
+    interval = setInterval(() => {
+        // Simulated Data Logic
+        const heart = Math.floor(Math.random() * 30) + 70;
+        const temp = (Math.random() * 2 + 36).toFixed(1);
+        const oxygen = Math.floor(Math.random() * 10) + 91;
 
-    interval = setInterval(()=>{
-
-        let heart = Math.floor(Math.random()*30)+70;
-        let temp = (Math.random()*2+36).toFixed(1);
-        let oxygen = Math.floor(Math.random()*12)+88;
-
+        // UI Updates
         document.getElementById("heart").innerText = heart + " BPM";
         document.getElementById("temp").innerText = temp + " °C";
         document.getElementById("oxygen").innerText = oxygen + " %";
 
-        chart.data.labels.push("");
+        // Chart Updates
+        const now = new Date().toLocaleTimeString([], { hour: '2-刻', minute: '2-digit', second: '2-digit' });
+        chart.data.labels.push(""); 
         chart.data.datasets[0].data.push(heart);
         chart.data.datasets[1].data.push(oxygen);
 
-        if(chart.data.labels.length > 20){
+        if (chart.data.labels.length > 15) {
             chart.data.labels.shift();
             chart.data.datasets[0].data.shift();
             chart.data.datasets[1].data.shift();
         }
+        chart.update('none'); // Update without animation for performance
 
-        chart.update();
-
+        // Alert Logic
         const alertBox = document.getElementById("alert");
         const status = document.getElementById("status");
 
-        if(oxygen < 95){
+        if (oxygen < 94 || heart > 110) {
             alertBox.className = "alert danger";
-            alertBox.innerHTML = "🚨 LOW OXYGEN ALERT!";
+            alertBox.innerHTML = "🚨 CRITICAL: Check Patient Health!";
             status.innerText = "Critical";
-        }else{
+            status.style.color = "var(--danger)";
+        } else {
             alertBox.className = "alert safe";
             alertBox.innerHTML = "✅ Patient Stable";
             status.innerText = "Normal";
+            status.style.color = "var(--success)";
         }
-
-    },1000);
+    }, 1000);
 }
 
-function stopMonitoring(){
+function stopMonitoring() {
     clearInterval(interval);
     interval = null;
     document.getElementById("status").innerText = "Stopped";
+    document.getElementById("status").style.color = "var(--text)";
 }
 </script>
 
