@@ -1,311 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Monitor System Elderly</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Monitoring System Elderly</title>
 
-    <style>
-        :root {
-            --primary: #2563eb;
-            --danger: #dc2626;
-            --success: #16a34a;
-            --bg: #f1f5f9;
-            --text: #1e293b;
-            --card-bg: #ffffff;
-            --shadow: 0 6px 20px rgba(0,0,0,0.08);
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
+body{
+    background:#f3f6fb;
+}
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-        }
+.container{
+    display:flex;
+    min-height:100vh;
+}
 
-        .header {
-            background: linear-gradient(135deg, var(--primary), #dbeafe);
-            padding: 28px 20px;
-            text-align: center;
-            font-size: 30px;
-            font-weight: 700;
-            box-shadow: var(--shadow);
-        }
+/* Sidebar */
+.sidebar{
+    width:250px;
+    background:linear-gradient(180deg,#0f172a,#1e293b);
+    color:white;
+    padding:25px;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:40px;
+    color:#38bdf8;
+}
 
-        .card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s ease;
-        }
+.menu a{
+    display:block;
+    text-decoration:none;
+    color:white;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:10px;
+    transition:.3s;
+}
 
-        .card:hover {
-            transform: translateY(-4px);
-        }
+.menu a:hover,
+.menu a.active{
+    background:#2563eb;
+}
 
-        .card-label {
-            font-size: 14px;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            display: block;
-            font-weight: 600;
-        }
+/* Main */
+.main{
+    flex:1;
+    padding:30px;
+}
 
-        .value {
-            display: block;
-            font-size: 30px;
-            font-weight: 800;
-            color: var(--primary);
-        }
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
 
-        .status-value {
-            font-size: 24px;
-        }
+.title{
+    font-size:28px;
+    font-weight:bold;
+    color:#0f172a;
+}
 
-        .controls {
-            text-align: center;
-            margin: 10px 0 25px;
-        }
+.btn{
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+}
 
-        button {
-            padding: 12px 28px;
-            margin: 5px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: transform 0.2s, opacity 0.2s;
-        }
+/* Cards */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
 
-        button:hover {
-            opacity: 0.95;
-        }
+.card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
 
-        button:active {
-            transform: scale(0.98);
-        }
+.card h3{
+    color:gray;
+    margin-bottom:10px;
+}
 
-        .btn-start {
-            background: var(--success);
-            color: white;
-        }
+.card h1{
+    color:#111827;
+    margin-bottom:10px;
+}
 
-        .btn-stop {
-            background: var(--danger);
-            color: white;
-        }
+.status{
+    font-size:14px;
+    color:green;
+    font-weight:bold;
+}
 
-        .alert {
-            width: 90%;
-            max-width: 1150px;
-            margin: 0 auto 25px;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: var(--shadow);
-        }
+/* Table */
+.table-box{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    margin-bottom:30px;
+}
 
-        .safe {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
+table{
+    width:100%;
+    border-collapse:collapse;
+}
 
-        .danger {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
+th,td{
+    padding:16px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
 
-        .chart-box {
-            width: 90%;
-            max-width: 1150px;
-            margin: 0 auto 40px;
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-        }
+th{
+    color:gray;
+}
 
-        @media (max-width: 600px) {
-            .header {
-                font-size: 24px;
-            }
+tr:hover{
+    background:#f8fbff;
+}
 
-            .value {
-                font-size: 24px;
-            }
+/* Alert colors */
+.good{
+    color:green;
+    font-weight:bold;
+}
 
-            .status-value {
-                font-size: 20px;
-            }
+.warning{
+    color:orange;
+    font-weight:bold;
+}
 
-            button {
-                width: 90%;
-                max-width: 280px;
-            }
-        }
-    </style>
+.danger{
+    color:red;
+    font-weight:bold;
+}
+
+/* Footer card */
+.monitor{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.progress{
+    height:20px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.bar{
+    height:100%;
+    width:82%;
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+}
+</style>
 </head>
 <body>
 
-    <div class="header">🏥 AI Elderly Health Monitor</div>
+<div class="container">
 
-    <div class="container">
-        <div class="card">
-            <span class="card-label">❤️ Heart Rate</span>
-            <span class="value" id="heart">--</span>
-        </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">❤️ ElderCare AI</div>
 
-        <div class="card">
-            <span class="card-label">🌡 Temperature</span>
-            <span class="value" id="temp">--</span>
-        </div>
-
-        <div class="card">
-            <span class="card-label">🫁 Oxygen</span>
-            <span class="value" id="oxygen">--</span>
-        </div>
-
-        <div class="card">
-            <span class="card-label">📊 Status</span>
-            <span class="value status-value" id="status">Ready</span>
+        <div class="menu">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Patients</a>
+            <a href="#">Vitals</a>
+            <a href="#">Alerts</a>
+            <a href="#">Reports</a>
+            <a href="#">Doctors</a>
+            <a href="#">Logout</a>
         </div>
     </div>
 
-    <div class="controls">
-        <button class="btn-start" onclick="startMonitoring()">▶ Start Monitoring</button>
-        <button class="btn-stop" onclick="stopMonitoring()">⛔ Stop Monitoring</button>
+    <!-- Main -->
+    <div class="main">
+
+        <div class="topbar">
+            <div class="title">AI Elderly Health Monitoring System</div>
+            <button class="btn">+ Add Patient</button>
+        </div>
+
+        <!-- Cards -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Patients</h3>
+                <h1>126</h1>
+                <div class="status">Healthy Monitoring</div>
+            </div>
+
+            <div class="card">
+                <h3>Heart Rate</h3>
+                <h1 id="heart">72 BPM</h1>
+                <div class="status">Normal</div>
+            </div>
+
+            <div class="card">
+                <h3>Blood Pressure</h3>
+                <h1 id="bp">120 / 80</h1>
+                <div class="status">Stable</div>
+            </div>
+
+            <div class="card">
+                <h3>Emergency Alerts</h3>
+                <h1 id="alert">2</h1>
+                <div style="color:red;font-weight:bold;">Needs Attention</div>
+            </div>
+
+        </div>
+
+        <!-- Table -->
+        <div class="table-box">
+            <h2 style="margin-bottom:20px;">Patient Live Monitoring</h2>
+
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Heart Rate</th>
+                    <th>Oxygen</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>Ravi Kumar</td>
+                    <td>72</td>
+                    <td>75 BPM</td>
+                    <td>98%</td>
+                    <td class="good">Healthy</td>
+                </tr>
+
+                <tr>
+                    <td>Suresh</td>
+                    <td>80</td>
+                    <td>95 BPM</td>
+                    <td>92%</td>
+                    <td class="warning">Observe</td>
+                </tr>
+
+                <tr>
+                    <td>Lakshmi</td>
+                    <td>76</td>
+                    <td>120 BPM</td>
+                    <td>85%</td>
+                    <td class="danger">Critical</td>
+                </tr>
+
+                <tr>
+                    <td>Mohan</td>
+                    <td>69</td>
+                    <td>78 BPM</td>
+                    <td>97%</td>
+                    <td class="good">Healthy</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- AI Score -->
+        <div class="monitor">
+            <h2>AI Health Score</h2>
+            <div class="progress">
+                <div class="bar"></div>
+            </div>
+            <p style="margin-top:10px;color:gray;">Overall Health Stability: <b>82%</b></p>
+        </div>
+
     </div>
+</div>
 
-    <div id="alert" class="alert safe">
-        Waiting for monitoring...
-    </div>
+<script>
+setInterval(()=>{
+    document.getElementById("heart").innerHTML =
+        Math.floor(Math.random()*30)+65 + " BPM";
 
-    <div class="chart-box">
-        <canvas id="healthChart"></canvas>
-    </div>
+    document.getElementById("bp").innerHTML =
+        (Math.floor(Math.random()*20)+110) + " / " +
+        (Math.floor(Math.random()*15)+70);
 
-    <script>
-        let interval = null;
-
-        const ctx = document.getElementById("healthChart").getContext("2d");
-
-        const chart = new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: [],
-                datasets: [
-                    {
-                        label: "Heart Rate (BPM)",
-                        data: [],
-                        borderColor: "#2563eb",
-                        backgroundColor: "rgba(37, 99, 235, 0.10)",
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4
-                    },
-                    {
-                        label: "Oxygen Level (%)",
-                        data: [],
-                        borderColor: "#16a34a",
-                        backgroundColor: "rgba(22, 163, 74, 0.10)",
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                animation: false,
-                scales: {
-                    y: {
-                        beginAtZero: false
-                    }
-                }
-            }
-        });
-
-        function startMonitoring() {
-            if (interval) return;
-
-            document.getElementById("status").innerText = "Monitoring";
-
-            interval = setInterval(() => {
-                const heart = Math.floor(Math.random() * 30) + 70;
-                const temp = (Math.random() * 2 + 36).toFixed(1);
-                const oxygen = Math.floor(Math.random() * 10) + 91;
-
-                document.getElementById("heart").innerText = heart + " BPM";
-                document.getElementById("temp").innerText = temp + " °C";
-                document.getElementById("oxygen").innerText = oxygen + " %";
-
-                const now = new Date().toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit"
-                });
-
-                chart.data.labels.push(now);
-                chart.data.datasets[0].data.push(heart);
-                chart.data.datasets[1].data.push(oxygen);
-
-                if (chart.data.labels.length > 15) {
-                    chart.data.labels.shift();
-                    chart.data.datasets[0].data.shift();
-                    chart.data.datasets[1].data.shift();
-                }
-
-                chart.update("none");
-
-                const alertBox = document.getElementById("alert");
-                const status = document.getElementById("status");
-
-                if (oxygen < 94 || heart > 110) {
-                    alertBox.className = "alert danger";
-                    alertBox.innerHTML = "🚨 CRITICAL: Check Patient Health!";
-                    status.innerText = "Critical";
-                    status.style.color = "#dc2626";
-                } else {
-                    alertBox.className = "alert safe";
-                    alertBox.innerHTML = "✅ Patient Stable";
-                    status.innerText = "Normal";
-                    status.style.color = "#16a34a";
-                }
-
-            }, 1000);
-        }
-
-        function stopMonitoring() {
-            clearInterval(interval);
-            interval = null;
-            document.getElementById("status").innerText = "Stopped";
-            document.getElementById("status").style.color = "#1e293b";
-        }
-    </script>
+    document.getElementById("alert").innerHTML =
+        Math.floor(Math.random()*5);
+},2000);
+</script>
 
 </body>
 </html>
