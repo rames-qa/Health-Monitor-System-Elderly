@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Health Monitoring Platform For Elderly </title>
+<title>Smart Health Monitoring Platform For Elderly</title>
 
 <style>
 *{
@@ -209,10 +209,31 @@ footer{
     font-size:16px;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE - MOBILE VERSION */
 @media(max-width:950px){
+
+    nav{
+        flex-direction:column;
+        gap:20px;
+        padding:18px 5%;
+        text-align:center;
+    }
+
+    .menu{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+    }
+
     .hero{
+        width:95%;
         grid-template-columns:1fr;
+        text-align:center;
+        padding:25px;
+    }
+
+    .hero img{
+        height:auto;
     }
 
     .hero h1{
@@ -223,29 +244,68 @@ footer{
         font-size:20px;
     }
 
-    nav{
-        flex-direction:column;
-        gap:20px;
-    }
-
-    .menu{
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:20px;
+    .section,
+    .info{
+        width:95%;
     }
 }
 
 @media(max-width:600px){
+
+    .logo{
+        font-size:26px;
+    }
+
+    .menu a{
+        font-size:14px;
+    }
+
+    .login-btn{
+        padding:10px 18px;
+        font-size:14px;
+    }
+
+    .hero{
+        padding:20px;
+    }
+
     .hero h1{
-        font-size:32px;
+        font-size:30px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .hero button{
+        padding:12px 22px;
+        font-size:15px;
     }
 
     .section-title{
-        font-size:28px;
+        font-size:26px;
+        text-align:center;
     }
 
-    .logo{
-        font-size:28px;
+    .card h3{
+        font-size:22px;
+    }
+
+    .card p{
+        font-size:15px;
+    }
+
+    .box h2{
+        font-size:34px;
+    }
+
+    .box p{
+        font-size:15px;
+    }
+
+    footer{
+        padding:25px;
+        font-size:14px;
     }
 }
 </style>
@@ -254,7 +314,7 @@ footer{
 
 <!-- NAVBAR -->
 <nav>
-    <div class="logo">❤️ ElderCare AI</div>
+    <div class="logo">❤️ Smart Health Monitoring Platform For Elderly</div>
 
     <div class="menu">
         <a href="#">Home</a>
@@ -289,7 +349,7 @@ footer{
     <div class="cards">
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="">
             <div class="card-content">
                 <h3>❤️ Heart Monitoring</h3>
                 <p>
@@ -299,7 +359,7 @@ footer{
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop" alt="">
             <div class="card-content">
                 <h3>🚨 Emergency Alerts</h3>
                 <p>
@@ -309,7 +369,7 @@ footer{
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop" alt="">
             <div class="card-content">
                 <h3>🩺 Doctor Connect</h3>
                 <p>
@@ -351,7 +411,7 @@ footer{
     <div class="cards">
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop" alt="">
             <div class="card-content">
                 <h3>Healthy Lifestyle For Seniors</h3>
                 <p>Simple habits that improve energy, mobility, and overall health.</p>
@@ -359,7 +419,7 @@ footer{
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1200&auto=format&fit=crop" alt="">
             <div class="card-content">
                 <h3>Prevent Heart Risks Early</h3>
                 <p>Early monitoring helps prevent severe complications and emergencies.</p>
@@ -367,7 +427,7 @@ footer{
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?q=80&w=1200&auto=format&fit=crop">
+            <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?q=80&w=1200&auto=format&fit=crop" alt="">
             <div class="card-content">
                 <h3>Safe Home Monitoring</h3>
                 <p>Smart devices help families monitor elderly loved ones remotely.</p>
@@ -378,7 +438,7 @@ footer{
 </section>
 
 <footer>
-    © 2026  Elder Care | Smart Health Monitoring Platform For Elderly 
+    © 2026 Smart Health Monitoring Platform For Elderly
 </footer>
 
 </body>
