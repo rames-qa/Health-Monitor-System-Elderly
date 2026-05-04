@@ -1,455 +1,464 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Health Monitoring Platform For Elderly</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Health Monitoring Platform For Elderly</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI, Arial, sans-serif;
-}
+    <style>
+        /* CSS Variables for easy color management */
+        :root {
+            --primary: #2e5cff;
+            --secondary: #002b8f;
+            --accent: #8ed6ff;
+            --bg-light: #f6f8fc;
+            --text-dark: #111827;
+            --text-muted: #6b7280;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
 
-body{
-    background:#f6f8fc;
-    color:#111827;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
-/* NAVBAR */
-nav{
-    background:#002b8f;
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 8%;
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:38px;
-    font-weight:bold;
-}
+        body {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-.icon{
-    font-size:42px;
-}
+        /* NAVBAR - Glassmorphism style */
+        nav {
+            background: rgba(0, 43, 143, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
 
-.menu{
-    display:flex;
-    gap:35px;
-    align-items:center;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
 
-.menu a{
-    color:white;
-    text-decoration:none;
-    font-size:17px;
-    transition:.3s;
-}
+        .icon {
+            font-size: 32px;
+        }
 
-.menu a:hover{
-    color:#8ed6ff;
-}
+        .menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
 
-.login-btn{
-    background:white;
-    color:#002b8f;
-    border:none;
-    padding:12px 22px;
-    border-radius:30px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: var(--transition);
+            opacity: 0.9;
+        }
 
-.login-btn:hover{
-    transform:scale(1.05);
-}
+        .menu a:hover {
+            color: var(--accent);
+            opacity: 1;
+        }
 
-/* HERO */
-.hero{
-    width:85%;
-    margin:40px auto;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    align-items:center;
-    background:white;
-    padding:35px;
-    border-radius:25px;
-    box-shadow:0 15px 40px rgba(0,0,0,.08);
-}
+        .login-btn {
+            background: var(--white);
+            color: var(--secondary);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
 
-.hero img{
-    width:100%;
-    border-radius:20px;
-    height:430px;
-    object-fit:cover;
-}
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
 
-.hero h1{
-    font-size:58px;
-    color:#2e5cff;
-    margin-bottom:20px;
-    line-height:1.15;
-}
+        /* HERO SECTION */
+        .hero {
+            width: 85%;
+            max-width: 1200px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        }
 
-.hero p{
-    font-size:24px;
-    color:#555;
-    line-height:1.6;
-    margin-bottom:25px;
-}
+        .hero-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
 
-.hero button{
-    border:none;
-    background:#2e5cff;
-    color:white;
-    padding:15px 30px;
-    border-radius:35px;
-    font-size:17px;
-    cursor:pointer;
-    box-shadow:0 10px 25px rgba(46,92,255,.25);
-    transition:.3s;
-}
+        .hero img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
 
-.hero button:hover{
-    transform:translateY(-3px);
-}
+        .hero:hover img {
+            transform: scale(1.03);
+        }
 
-/* SECTION */
-.section{
-    width:85%;
-    margin:50px auto;
-}
+        .hero h1 {
+            font-size: 52px;
+            color: var(--secondary);
+            margin-bottom: 24px;
+            line-height: 1.1;
+            font-weight: 800;
+        }
 
-.section-title{
-    font-size:34px;
-    margin-bottom:25px;
-    color:#111827;
-}
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+        }
 
-/* CARDS */
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:28px;
-}
+        .hero button {
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(46, 92, 255, 0.3);
+            transition: var(--transition);
+        }
 
-.card{
-    background:white;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-    transition:.3s;
-}
+        .hero button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(46, 92, 255, 0.4);
+        }
 
-.card:hover{
-    transform:translateY(-8px);
-}
+        /* SECTION HEADERS */
+        .section {
+            width: 85%;
+            max-width: 1200px;
+            margin: 80px auto;
+        }
 
-.card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
 
-.card-content{
-    padding:25px;
-}
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
 
-.card h3{
-    font-size:28px;
-    margin-bottom:15px;
-}
+        /* MODERN CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
 
-.card p{
-    font-size:17px;
-    color:#666;
-    line-height:1.6;
-}
+        .card {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
 
-/* INFO SECTION */
-.info{
-    width:85%;
-    margin:60px auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-}
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
 
-.box{
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
+        .card-img-wrapper {
+            height: 220px;
+            overflow: hidden;
+        }
 
-.box h2{
-    color:#2e5cff;
-    font-size:45px;
-    margin-bottom:10px;
-}
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.box p{
-    color:#666;
-    font-size:18px;
-}
+        .card-content {
+            padding: 30px;
+        }
 
-/* FOOTER */
-footer{
-    margin-top:60px;
-    background:#002b8f;
-    color:white;
-    text-align:center;
-    padding:35px;
-    font-size:16px;
-}
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--secondary);
+        }
 
-/* RESPONSIVE - MOBILE VERSION */
-@media(max-width:950px){
+        .card p {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
 
-    nav{
-        flex-direction:column;
-        gap:20px;
-        padding:18px 5%;
-        text-align:center;
-    }
+        /* STATS BOXES */
+        .info {
+            width: 85%;
+            max-width: 1200px;
+            margin: 80px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
 
-    .menu{
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:15px;
-    }
+        .box {
+            background: var(--white);
+            padding: 40px 20px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
 
-    .hero{
-        width:95%;
-        grid-template-columns:1fr;
-        text-align:center;
-        padding:25px;
-    }
+        .box:hover {
+            border-bottom: 4px solid var(--primary);
+            transform: scale(1.02);
+        }
 
-    .hero img{
-        height:auto;
-    }
+        .box h2 {
+            color: var(--primary);
+            font-size: 48px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
 
-    .hero h1{
-        font-size:42px;
-    }
+        .box p {
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .hero p{
-        font-size:20px;
-    }
+        /* FOOTER */
+        footer {
+            margin-top: 100px;
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
 
-    .section,
-    .info{
-        width:95%;
-    }
-}
+        footer p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
 
-@media(max-width:600px){
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                width: 92%;
+            }
 
-    .logo{
-        font-size:26px;
-    }
+            .hero h1 {
+                font-size: 40px;
+            }
 
-    .menu a{
-        font-size:14px;
-    }
+            .section-title {
+                text-align: center;
+            }
 
-    .login-btn{
-        padding:10px 18px;
-        font-size:14px;
-    }
+            .section-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
 
-    .hero{
-        padding:20px;
-    }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
 
-    .hero h1{
-        font-size:30px;
-    }
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
 
-    .hero p{
-        font-size:16px;
-    }
-
-    .hero button{
-        padding:12px 22px;
-        font-size:15px;
-    }
-
-    .section-title{
-        font-size:26px;
-        text-align:center;
-    }
-
-    .card h3{
-        font-size:22px;
-    }
-
-    .card p{
-        font-size:15px;
-    }
-
-    .box h2{
-        font-size:34px;
-    }
-
-    .box p{
-        font-size:15px;
-    }
-
-    footer{
-        padding:25px;
-        font-size:14px;
-    }
-}
-</style>
+            .logo {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-
-<!-- NAVBAR -->
-<nav>
-    <div class="logo">
-        <span class="icon">🩺</span>
-        Smart Health Monitoring Platform For Elderly
-    </div>
-</nav>
-</div>
-    <div class="menu">
-        <a href="#">Home</a>
-        <a href="#">Health Monitoring</a>
-        <a href="#">Doctors</a>
-        <a href="#">Emergency Care</a>
-        <a href="#">Reports</a>
-        <button class="login-btn">Login</button>
-    </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="healthcare">
-
-    <div>
-        <h1>Smart Ways To Monitor Elderly Health</h1>
-        <p>
-            Real-time heart monitoring, emergency alerts,
-            oxygen tracking, doctor connection, and AI-based
-            health prediction — all in one intelligent system.
-        </p>
-
-        <button>Explore Care System</button>
-    </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section">
-    <h2 class="section-title">Health Monitoring Services</h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="">
-            <div class="card-content">
-                <h3>❤️ Heart Monitoring</h3>
-                <p>
-                    AI continuously monitors heart rate and detects unusual activity instantly.
-                </p>
-            </div>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            <span class="icon">🩺</span>
+            Smart Health Monitoring Platform For Elderly
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop" alt="">
-            <div class="card-content">
-                <h3>🚨 Emergency Alerts</h3>
-                <p>
-                    Automatic family and hospital notification during critical conditions.
-                </p>
-            </div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#">Monitoring</a>
+            <a href="#">Doctors</a>
+            <a href="#">Emergency</a>
+            <a href="#">Reports</a>
+            <button class="login-btn">Login</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="healthcare">
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop" alt="">
-            <div class="card-content">
-                <h3>🩺 Doctor Connect</h3>
-                <p>
-                    Connect instantly with doctors and share live patient vitals remotely.
-                </p>
+        <div>
+            <h1>Smart Ways To Monitor Elderly Health</h1>
+            <p>
+                Real-time heart monitoring, emergency alerts,
+                oxygen tracking, doctor connection, and AI-based
+                health prediction — all in one intelligent system.
+            </p>
+            <button>Explore Care System →</button>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section">
+        <h2 class="section-title">Health Monitoring Services</h2>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="Heart Monitoring">
+                </div>
+                <div class="card-content">
+                    <h3>🫀 Heart Monitoring</h3>
+                    <p>AI continuously monitors heart rate and detects unusual activity instantly to ensure peace of mind.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop" alt="Emergency Alerts">
+                </div>
+                <div class="card-content">
+                    <h3>🚨 Emergency Alerts</h3>
+                    <p>Automatic family and hospital notification during critical conditions, minimizing response time.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop" alt="Doctor Connect">
+                </div>
+                <div class="card-content">
+                    <h3>🩺 Doctor Connect</h3>
+                    <p>Connect instantly with doctors and share live patient vitals remotely via our secure encrypted link.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-    </div>
-</section>
-
-<!-- STATS -->
-<section class="info">
-    <div class="box">
-        <h2>24/7</h2>
-        <p>Health Monitoring</p>
-    </div>
-
-    <div class="box">
-        <h2>98%</h2>
-        <p>Prediction Accuracy</p>
-    </div>
-
-    <div class="box">
-        <h2>500+</h2>
-        <p>Doctors Connected</p>
-    </div>
-
-    <div class="box">
-        <h2>10K+</h2>
-        <p>Elders Protected</p>
-    </div>
-</section>
-
-<!-- ARTICLES -->
-<section class="section">
-    <h2 class="section-title">Latest ElderCare Tips</h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop" alt="">
-            <div class="card-content">
-                <h3>Healthy Lifestyle For Seniors</h3>
-                <p>Simple habits that improve energy, mobility, and overall health.</p>
-            </div>
+    <!-- STATS -->
+    <section class="info">
+        <div class="box">
+            <h2>24/7</h2>
+            <p>Active Monitoring</p>
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1200&auto=format&fit=crop" alt="">
-            <div class="card-content">
-                <h3>Prevent Heart Risks Early</h3>
-                <p>Early monitoring helps prevent severe complications and emergencies.</p>
-            </div>
+        <div class="box">
+            <h2>98%</h2>
+            <p>AI Accuracy</p>
         </div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?q=80&w=1200&auto=format&fit=crop" alt="">
-            <div class="card-content">
-                <h3>Safe Home Monitoring</h3>
-                <p>Smart devices help families monitor elderly loved ones remotely.</p>
-            </div>
+        <div class="box">
+            <h2>500+</h2>
+            <p>Specialists</p>
         </div>
 
-    </div>
-</section>
+        <div class="box">
+            <h2>10K+</h2>
+            <p>Active Users</p>
+        </div>
+    </section>
 
-<footer>
-    © 2026 Smart Health Monitoring Platform For Elderly
-</footer>
+    <!-- ARTICLES -->
+    <section class="section">
+        <h2 class="section-title">Latest ElderCare Tips</h2>
 
+        <div class="cards">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1200&auto=format&fit=crop" alt="Lifestyle">
+                <div class="card-content">
+                    <h3>Healthy Lifestyle For Seniors</h3>
+                    <p>Simple daily habits that significantly improve energy, mobility, and overall mental health.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1200&auto=format&fit=crop" alt="Heart Risks">
+                <div class="card-content">
+                    <h3>Prevent Heart Risks Early</h3>
+                    <p>Proactive monitoring helps prevent severe complications and ensures early intervention.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?q=80&w=1200&auto=format&fit=crop" alt="Home Monitoring">
+                <div class="card-content">
+                    <h3>Safe Home Monitoring</h3>
+                    <p>How smart wearable devices help families stay connected to their loved ones' health status.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <strong>Smart Health Monitoring Platform For Elderly</strong>
+        <p style="margin-top: 15px;">© 2026 Caring for our seniors with AI intelligence.</p>
+    </footer>
 </body>
 </html>
