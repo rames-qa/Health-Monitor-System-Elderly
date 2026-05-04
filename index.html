@@ -75,8 +75,6 @@
             transition: var(--transition);
         }
 
-        .submit-login:hover { background: var(--secondary); }
-
         /* --- ORIGINAL STYLES --- */
         .gps-box {
             width: 85%;
@@ -129,7 +127,8 @@
         .icon { font-size: 32px; }
 
         .menu { display: flex; gap: 30px; align-items: center; }
-        .menu a { color: white; text-decoration: none; font-size: 15px; font-weight: 500; opacity: 0.9; }
+        .menu a { color: white; text-decoration: none; font-size: 15px; font-weight: 500; transition: var(--transition); opacity: 0.9; }
+        .menu a:hover { color: var(--accent); opacity: 1; }
 
         .login-btn {
             background: var(--white);
@@ -159,12 +158,25 @@
         .hero img { width: 100%; height: 450px; object-fit: cover; border-radius: 20px; }
         .hero h1 { font-size: 48px; color: var(--secondary); margin-bottom: 24px; font-weight: 800; }
 
+        .hero button {
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(46, 92, 255, 0.3);
+            transition: var(--transition);
+        }
+
         .section { width: 85%; max-width: 1200px; margin: 80px auto; }
-        .section-title { font-size: 32px; margin-bottom: 40px; color: var(--secondary); position: relative; }
-        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 60px; height: 4px; background: var(--primary); }
+        .section-title { font-size: 32px; margin-bottom: 40px; color: var(--secondary); position: relative; padding-bottom: 10px; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: var(--primary); border-radius: 2px; }
 
         .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .card { background: var(--white); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition: var(--transition); }
+        .card { background: var(--white); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition: var(--transition); border: 1px solid rgba(0, 0, 0, 0.02); }
         .card:hover { transform: translateY(-10px); }
         .card-img-wrapper { height: 220px; overflow: hidden; }
         .card img { width: 100%; height: 100%; object-fit: cover; }
@@ -175,6 +187,7 @@
 
         .info { width: 85%; max-width: 1200px; margin: 80px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
         .box { background: var(--white); padding: 40px 20px; border-radius: 24px; text-align: center; }
+        .box h2 { color: var(--primary); font-size: 42px; margin-bottom: 8px; }
 
         footer { margin-top: 100px; background: var(--secondary); color: white; text-align: center; padding: 50px 20px; }
 
@@ -183,37 +196,35 @@
             70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
         }
+        @keyframes dash { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+
+        @media (max-width: 992px) { .hero { grid-template-columns: 1fr; text-align: center; } }
     </style>
 </head>
 <body>
 
-    <!-- LOGIN MODAL -->
+    <!-- LOGIN MODAL (Added Feature) -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
-            <h2 style="color: var(--secondary); margin-bottom: 10px;">Welcome Back</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Login to access patient records</p>
-            
+            <h2 style="color: var(--secondary); margin-bottom: 10px;">Login</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Access your health dashboard</p>
             <form class="login-form" onsubmit="handleLogin(event)">
                 <input type="email" placeholder="Email Address" required>
                 <input type="password" placeholder="Password" required>
                 <button type="submit" class="submit-login">Secure Login</button>
             </form>
-            
-            <p style="margin-top: 20px; font-size: 14px; color: var(--text-muted);">
-                Don't have an account? <a href="#" style="color: var(--primary);">Sign Up</a>
-            </p>
         </div>
     </div>
 
-    <!-- GPS LOCATION -->
+    <!-- GPS LOCATION (Original) -->
     <div class="gps-box">
         <h3>📍 Live Location Tracking</h3>
         <p id="locationText">Detecting location...</p>
-        <button onclick="getLocation()">Refresh My Location</button>
+        <button onclick="getLocation()">Get My Location</button>
     </div>
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR (Original with functional Login) -->
     <nav>
         <div class="logo">
             <span class="icon">🩺</span>
@@ -224,58 +235,97 @@
             <a href="#">Monitoring</a>
             <a href="#">Doctors</a>
             <a href="#">Emergency</a>
-            <!-- MODAL TRIGGER -->
             <button class="login-btn" id="loginBtn">Login</button>
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- HERO (Original) -->
     <section class="hero">
         <div class="hero-image-container">
             <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="healthcare">
         </div>
         <div>
             <h1>Smart Ways To Monitor Elderly Health</h1>
-            <p>Real-time heart monitoring, emergency alerts, and AI-based health prediction.</p>
+            <p>Real-time heart monitoring, emergency alerts, and AI-based health prediction — all in one intelligent system.</p>
             <button onclick="window.location.href='#services'">Explore Care System →</button>
         </div>
     </section>
 
-    <!-- SERVICES (Original Cards remain the same) -->
+    <!-- FEATURES (Original) -->
     <section class="section" id="services">
         <h2 class="section-title">Health Monitoring Services</h2>
         <div class="cards">
-            <!-- Heart Rate Card -->
-            <div class="card" onclick="window.open('https://www.narayanahealth.org/bangalore/cardiac-surgery-adult/dr-devi-prasad-shetty', '_blank')">
+            <!-- HEART MONITORING -->
+            <div class="card" style="cursor: pointer; border: 2px solid rgba(46, 92, 255, 0.1);" onclick="window.open('https://www.narayanahealth.org/bangalore/cardiac-surgery-adult/dr-devi-prasad-shetty', '_blank')">
                 <div class="card-img-wrapper" style="position: relative; background: #000;">
-                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="Heart" style="opacity: 0.8;">
-                    <div style="position: absolute; top: 15px; left: 15px; background: #ff0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; animation: pulse-red 2s infinite;">LIVE</div>
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="Heart Monitoring" style="opacity: 0.8;">
+                    <div style="position: absolute; top: 15px; left: 15px; background: #ff0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 6px; animation: pulse-red 2s infinite;">
+                        <span style="width: 8px; height: 8px; background: white; border-radius: 50%;"></span>
+                        LIVE MONITORING
+                    </div>
                 </div>
                 <div class="card-content">
-                    <h3>🫀 Heart Rate</h3>
-                    <span id="bpmDisplay" style="font-size: 24px; font-weight: bold; color: #2e5cff;">72 <small>BPM</small></span>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3 style="margin: 0;"> 🫀 Heart Rate</h3>
+                        <span id="bpmDisplay" style="font-size: 24px; font-weight: bold; color: #2e5cff; font-family: monospace;">72 <small style="font-size: 14px;">BPM</small></span>
+                    </div>
+                    <div style="width: 100%; height: 40px; background: #f0f4ff; border-radius: 8px; overflow: hidden; margin-bottom: 15px; display: flex; align-items: center; padding: 0 10px;">
+                        <svg viewBox="0 0 100 20" style="width: 100%; height: 100%;">
+                            <polyline fill="none" stroke="#2e5cff" stroke-width="2" points="0,10 10,10 15,2 20,18 25,10 40,10 45,2 50,18 55,10 70,10 75,2 80,18 85,10 100,10" style="stroke-dasharray: 100; stroke-dashoffset: 100; animation: dash 2s linear infinite;" />
+                        </svg>
+                    </div>
+                    <p style="font-size: 14px; color: #666;">AI analyzing rhythm. Stable. <strong>Touch to consult Dr. Devi Shetty.</strong></p>
                 </div>
             </div>
-            <!-- Alert Card -->
-            <div class="card" onclick="triggerEmergency()">
+
+            <!-- EMERGENCY ALERTS -->
+            <div class="card" style="cursor: pointer;" onclick="triggerEmergency()">
                 <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop"></div>
-                <div class="card-content"><h3>🚨 Emergency Alerts</h3><p>Automatic notifications.</p></div>
+                <div class="card-content"><h3>🚨 Emergency Alerts</h3><p>Automatic family and hospital notification during critical conditions.</p></div>
             </div>
-            <!-- Doctor Card -->
-            <div class="card" onclick="window.open('https://www.apollohospitals.com/region/bangalore/top-cardiologists-cardiac-surgeons-in-bangalore/', '_blank')">
+
+            <!-- DOCTOR CONNECT -->
+            <div class="card" style="cursor: pointer;" onclick="window.open('https://www.apollohospitals.com/region/bangalore/top-cardiologists-cardiac-surgeons-in-bangalore/', '_blank')">
                 <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop"></div>
-                <div class="card-content"><h3>🩺 Doctor Connect</h3><p>Secure link to specialists.</p></div>
+                <div class="card-content"><h3>🩺 Doctor Connect</h3><p>Connect instantly with specialists and share live patient vitals.</p></div>
+            </div>
+        </div>
+
+        <!-- STATUS CONTAINER (Original) -->
+        <div class="status-container">
+            <div class="status-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/maps/search/?api=1&query=current+location', '_blank')">
+                <h3>📍 Location Tracking</h3>
+                <p><strong>City:</strong> Bangalore, Karnataka</p>
+                <p style="color: green;">🟢 Enabled & Active</p>
+            </div>
+            <div class="status-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/maps/search/diagnostic+centers+near+Bangalore', '_blank')">
+                <h3>🏥 Diagnostics System</h3>
+                <p>Nearby labs auto-detected</p>
+                <p style="color: green;">🟢 4 Centres Found</p>
+            </div>
+            <div class="status-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/maps/search/emergency+hospitals+in+Bangalore', '_blank')">
+                <h3>🚑 Emergency Services</h3>
+                <p>Linked to Bangalore hospitals</p>
+                <p style="color: #d32f2f; font-weight: bold;">🟢 SOS Ready</p>
             </div>
         </div>
     </section>
 
+    <!-- STATS (Original) -->
+    <section class="info">
+        <div class="box"><h2>24/7</h2><p>Monitoring</p></div>
+        <div class="box"><h2>98%</h2><p>Accuracy</p></div>
+        <div class="box"><h2>500+</h2><p>Doctors</p></div>
+        <div class="box"><h2>10K+</h2><p>Users</p></div>
+    </section>
+
     <footer>
         <strong>Smart Health Monitoring Platform</strong>
-        <p>© Rameshkumar K 2026</p>
+        <p style="margin-top: 15px;">© Rameshkumar K 2026 Caring for our seniors with AI intelligence.</p>
     </footer>
 
     <script>
-        // --- LOGIN MODAL LOGIC ---
+        // --- LOGIN LOGIC ---
         const modal = document.getElementById("loginModal");
         const btn = document.getElementById("loginBtn");
         const span = document.getElementById("closeModal");
@@ -286,35 +336,39 @@
 
         function handleLogin(e) {
             e.preventDefault();
-            alert("Success! You are now logged into the Health Monitoring System.");
+            alert("Login Successful! Accessing Health Records...");
             modal.style.display = "none";
         }
 
-        // --- PREVIOUS LOGIC ---
-        function startHeartRateMonitor() {
-            const bpmDisplay = document.getElementById("bpmDisplay");
-            setInterval(() => {
-                const randomBPM = Math.floor(Math.random() * (85 - 65 + 1)) + 65;
-                bpmDisplay.innerHTML = `${randomBPM} <small>BPM</small>`;
-            }, 3000);
-        }
-
+        // --- ORIGINAL GPS & MONITORING LOGIC ---
         function getLocation() {
-            const locText = document.getElementById("locationText");
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    locText.innerHTML = `Lat: ${position.coords.latitude.toFixed(4)} | Lon: ${position.coords.longitude.toFixed(4)}`;
+                navigator.geolocation.getCurrentPosition(showPosition, () => {
+                    document.getElementById("locationText").innerHTML = "Location access denied";
                 });
             }
         }
 
+        function showPosition(position) {
+            document.getElementById("locationText").innerHTML =
+                "Lat: " + position.coords.latitude.toFixed(4) + " | Lon: " + position.coords.longitude.toFixed(4);
+        }
+
         function triggerEmergency() {
-            if (confirm("Send SOS to Emergency Contacts?")) {
-                alert("🚨 SOS SENT! Help is on the way.");
+            if (confirm("EMERGENCY DETECTED! Send SOS?")) {
+                alert("🚨 SOS SENT!\n- Services notified.\n- Dr. Devi Shetty alerted.");
             }
         }
 
-        window.onload = () => { startHeartRateMonitor(); getLocation(); };
+        function animateHeart() {
+            const bpm = document.getElementById("bpmDisplay");
+            setInterval(() => {
+                const rate = Math.floor(Math.random() * (78 - 68 + 1)) + 68;
+                bpm.innerHTML = `${rate} <small style="font-size: 14px;">BPM</small>`;
+            }, 3000);
+        }
+
+        window.onload = animateHeart;
     </script>
 </body>
 </html>
