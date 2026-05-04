@@ -374,11 +374,50 @@
                 <div class="card-img-wrapper">
                     <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="Heart Monitoring">
                 </div>
-                <div class="card-content">
-                    <h3>🫀 Heart Monitoring</h3>
-                    <p>AI continuously monitors heart rate and detects unusual activity instantly to ensure peace of mind.</p>
-                </div>
-            </div>
+                <!-- HEART MONITORING CARD -->
+<div class="card" style="cursor: pointer; border: 2px solid rgba(46, 92, 255, 0.1);" onclick="window.open('https://www.narayanahealth.org/bangalore/cardiac-surgery-adult/dr-devi-prasad-shetty', '_blank')">
+    <div class="card-img-wrapper" style="position: relative; background: #000;">
+        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="Heart Monitoring" style="opacity: 0.8;">
+        
+        <!-- LIVE STATUS OVERLAY -->
+        <div style="position: absolute; top: 15px; left: 15px; background: #ff0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 6px; animation: pulse-red 2s infinite; box-shadow: 0 0 10px rgba(255,0,0,0.5);">
+            <span style="width: 8px; height: 8px; background: white; border-radius: 50%;"></span> LIVE MONITORING
+        </div>
+    </div>
+    
+    <div class="card-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="margin: 0;">❤️ Heart Rate</h3>
+            <span style="font-size: 24px; font-weight: bold; color: #2e5cff; font-family: monospace;">72 <small style="font-size: 14px;">BPM</small></span>
+        </div>
+        
+        <!-- VISUAL HEARTBEAT LINE -->
+        <div style="width: 100%; height: 40px; background: #f0f4ff; border-radius: 8px; overflow: hidden; margin-bottom: 15px; display: flex; align-items: center; padding: 0 10px;">
+            <svg viewBox="0 0 100 20" style="width: 100%; height: 100%;">
+                <polyline fill="none" stroke="#2e5cff" stroke-width="2" points="0,10 10,10 15,2 20,18 25,10 40,10 45,2 50,18 55,10 70,10 75,2 80,18 85,10 100,10" style="stroke-dasharray: 100; stroke-dashoffset: 100; animation: dash 2s linear infinite;"/>
+            </svg>
+        </div>
+
+        <p style="font-size: 14px; color: #666; line-height: 1.4;">
+            AI is analyzing your rhythm. Everything looks stable. 
+            <strong style="color: #002b8f; display: block; margin-top: 5px;">Touch to consult Dr. Devi Shetty instantly.</strong>
+        </p>
+    </div>
+</div>
+
+<style>
+/* ANIMATIONS FOR "LIFE" */
+@keyframes pulse-red {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+@keyframes dash {
+    from { stroke-dashoffset: 100; }
+    to { stroke-dashoffset: 0; }
+}
+</style>
 
             <div class="card">
                 <div class="card-img-wrapper">
