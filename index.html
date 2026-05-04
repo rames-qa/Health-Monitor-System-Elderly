@@ -18,6 +18,11 @@
             --transition: all 0.3s ease;
         }
 
+        /* --- GLOBAL SMOOTH SCROLL --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* --- LOGIN MODAL STYLES --- */
         .modal-overlay {
             position: fixed;
@@ -26,7 +31,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            display: none; /* Hidden by default */
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
@@ -153,6 +158,7 @@
             padding: 50px;
             border-radius: 30px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            scroll-margin-top: 120px;
         }
 
         .hero img { width: 100%; height: 450px; object-fit: cover; border-radius: 20px; }
@@ -171,7 +177,7 @@
             transition: var(--transition);
         }
 
-        .section { width: 85%; max-width: 1200px; margin: 80px auto; }
+        .section { width: 85%; max-width: 1200px; margin: 80px auto; scroll-margin-top: 100px; }
         .section-title { font-size: 32px; margin-bottom: 40px; color: var(--secondary); position: relative; padding-bottom: 10px; }
         .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: var(--primary); border-radius: 2px; }
 
@@ -203,55 +209,55 @@
 </head>
 <body>
 
-    <!-- LOGIN MODAL (Added Feature) -->
+    <!-- LOGIN MODAL -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
-            <h2 style="color: var(--secondary); margin-bottom: 10px;">Login</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Access your health dashboard</p>
+            <h2 style="color: var(--secondary); margin-bottom: 10px;">Secure Login</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Access your personal health data</p>
             <form class="login-form" onsubmit="handleLogin(event)">
                 <input type="email" placeholder="Email Address" required>
                 <input type="password" placeholder="Password" required>
-                <button type="submit" class="submit-login">Secure Login</button>
+                <button type="submit" class="submit-login">Login to Dashboard</button>
             </form>
         </div>
     </div>
 
-    <!-- GPS LOCATION (Original) -->
+    <!-- GPS LOCATION SECTION -->
     <div class="gps-box">
         <h3>📍 Live Location Tracking</h3>
         <p id="locationText">Detecting location...</p>
         <button onclick="getLocation()">Get My Location</button>
     </div>
 
-    <!-- NAVBAR (Original with functional Login) -->
+    <!-- NAVBAR -->
     <nav>
         <div class="logo">
             <span class="icon">🩺</span>
             Smart Health Monitoring Platform
         </div>
         <div class="menu">
-            <a href="#">Home</a>
-            <a href="#">Monitoring</a>
-            <a href="#">Doctors</a>
-            <a href="#">Emergency</a>
+            <a href="#home">Home</a>
+            <a href="#services">Monitoring</a>
+            <a href="#doctors">Doctors</a>
+            <a href="#emergency">Emergency</a>
             <button class="login-btn" id="loginBtn">Login</button>
         </div>
     </nav>
 
-    <!-- HERO (Original) -->
-    <section class="hero">
+    <!-- HERO SECTION (HOME) -->
+    <section class="hero" id="home">
         <div class="hero-image-container">
             <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="healthcare">
         </div>
         <div>
             <h1>Smart Ways To Monitor Elderly Health</h1>
             <p>Real-time heart monitoring, emergency alerts, and AI-based health prediction — all in one intelligent system.</p>
-            <button onclick="window.location.href='#services'">Explore Care System →</button>
+            <button onclick="document.getElementById('services').scrollIntoView()">Explore Care System →</button>
         </div>
     </section>
 
-    <!-- FEATURES (Original) -->
+    <!-- MONITORING SECTION -->
     <section class="section" id="services">
         <h2 class="section-title">Health Monitoring Services</h2>
         <div class="cards">
@@ -274,25 +280,25 @@
                             <polyline fill="none" stroke="#2e5cff" stroke-width="2" points="0,10 10,10 15,2 20,18 25,10 40,10 45,2 50,18 55,10 70,10 75,2 80,18 85,10 100,10" style="stroke-dasharray: 100; stroke-dashoffset: 100; animation: dash 2s linear infinite;" />
                         </svg>
                     </div>
-                    <p style="font-size: 14px; color: #666;">AI analyzing rhythm. Stable. <strong>Touch to consult Dr. Devi Shetty.</strong></p>
+                    <p style="font-size: 14px; color: #666;">AI analyzing rhythm. Stable. <strong>Consult Dr. Devi Shetty.</strong></p>
                 </div>
             </div>
 
             <!-- EMERGENCY ALERTS -->
             <div class="card" style="cursor: pointer;" onclick="triggerEmergency()">
                 <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop"></div>
-                <div class="card-content"><h3>🚨 Emergency Alerts</h3><p>Automatic family and hospital notification during critical conditions.</p></div>
+                <div class="card-content"><h3>🚨 Emergency Alerts</h3><p>Automatic hospital notification during critical conditions.</p></div>
             </div>
 
             <!-- DOCTOR CONNECT -->
-            <div class="card" style="cursor: pointer;" onclick="window.open('https://www.apollohospitals.com/region/bangalore/top-cardiologists-cardiac-surgeons-in-bangalore/', '_blank')">
+            <div class="card" style="cursor: pointer;" onclick="window.open('https://www.apollohospitals.com', '_blank')">
                 <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop"></div>
-                <div class="card-content"><h3>🩺 Doctor Connect</h3><p>Connect instantly with specialists and share live patient vitals.</p></div>
+                <div class="card-content"><h3>🩺 Doctor Connect</h3><p>Connect instantly with specialists and share patient vitals.</p></div>
             </div>
         </div>
 
-        <!-- STATUS CONTAINER (Original) -->
-        <div class="status-container">
+        <!-- EMERGENCY TARGET SECTION -->
+        <div class="status-container" id="emergency">
             <div class="status-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/maps/search/?api=1&query=current+location', '_blank')">
                 <h3>📍 Location Tracking</h3>
                 <p><strong>City:</strong> Bangalore, Karnataka</p>
@@ -300,32 +306,71 @@
             </div>
             <div class="status-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/maps/search/diagnostic+centers+near+Bangalore', '_blank')">
                 <h3>🏥 Diagnostics System</h3>
-                <p>Nearby labs auto-detected</p>
+                <p>Labs auto-detected</p>
                 <p style="color: green;">🟢 4 Centres Found</p>
             </div>
             <div class="status-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/maps/search/emergency+hospitals+in+Bangalore', '_blank')">
                 <h3>🚑 Emergency Services</h3>
-                <p>Linked to Bangalore hospitals</p>
+                <p>Linked to local hospitals</p>
                 <p style="color: #d32f2f; font-weight: bold;">🟢 SOS Ready</p>
             </div>
         </div>
     </section>
 
-    <!-- STATS (Original) -->
+    <!-- DOCTORS SECTION -->
+    <section class="section" id="doctors">
+        <h2 class="section-title">Recommended Specialists</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1200&auto=format&fit=crop" alt="Doctor">
+                </div>
+                <div class="card-content">
+                    <h3>Dr. Devi Shetty</h3>
+                    <p>Chief Cardiac Surgeon - Available for remote vitals review and consultation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS (ANIMATED) -->
     <section class="info">
-        <div class="box"><h2>24/7</h2><p>Monitoring</p></div>
-        <div class="box"><h2>98%</h2><p>Accuracy</p></div>
-        <div class="box"><h2>500+</h2><p>Doctors</p></div>
-        <div class="box"><h2>10K+</h2><p>Users</p></div>
+        <div class="box"><h2 class="counter" data-target="24">0</h2><p>24/7 Monitoring</p></div>
+        <div class="box"><h2 class="counter" data-target="98">0</h2><p>% Accuracy</p></div>
+        <div class="box"><h2 class="counter" data-target="500">0</h2><p>Doctors</p></div>
+        <div class="box"><h2 class="counter" data-target="10000">0</h2><p>Users</p></div>
     </section>
 
     <footer>
         <strong>Smart Health Monitoring Platform</strong>
-        <p style="margin-top: 15px;">© Rameshkumar K 2026 Caring for our seniors with AI intelligence.</p>
+        <p style="margin-top: 15px;">© Rameshkumar K 2026. Caring for our seniors with AI intelligence.</p>
     </footer>
 
     <script>
-        // --- LOGIN LOGIC ---
+        // --- COUNTER LOGIC ---
+        function startCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText.replace('+', '').replace('%', '').replace('K', '');
+                    const inc = target / 80;
+
+                    if (count < target) {
+                        const val = Math.ceil(count + inc);
+                        if (target === 98) counter.innerText = val + "%";
+                        else if (target === 500) counter.innerText = val + "+";
+                        else if (target === 10000) counter.innerText = "10K+";
+                        else if (target === 24) counter.innerText = "24/7";
+                        else counter.innerText = val;
+                        setTimeout(updateCount, 30);
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // --- LOGIN MODAL LOGIC ---
         const modal = document.getElementById("loginModal");
         const btn = document.getElementById("loginBtn");
         const span = document.getElementById("closeModal");
@@ -340,23 +385,18 @@
             modal.style.display = "none";
         }
 
-        // --- ORIGINAL GPS & MONITORING LOGIC ---
+        // --- GPS & HEART RATE LOGIC ---
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, () => {
-                    document.getElementById("locationText").innerHTML = "Location access denied";
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    document.getElementById("locationText").innerHTML = `Lat: ${pos.coords.latitude.toFixed(4)} | Lon: ${pos.coords.longitude.toFixed(4)}`;
                 });
             }
         }
 
-        function showPosition(position) {
-            document.getElementById("locationText").innerHTML =
-                "Lat: " + position.coords.latitude.toFixed(4) + " | Lon: " + position.coords.longitude.toFixed(4);
-        }
-
         function triggerEmergency() {
             if (confirm("EMERGENCY DETECTED! Send SOS?")) {
-                alert("🚨 SOS SENT!\n- Services notified.\n- Dr. Devi Shetty alerted.");
+                alert("🚨 SOS SENT!\n- Emergency services notified.\n- Dr. Devi Shetty alerted.");
             }
         }
 
@@ -368,7 +408,11 @@
             }, 3000);
         }
 
-        window.onload = animateHeart;
+        window.onload = () => {
+            animateHeart();
+            startCounters();
+            getLocation();
+        };
     </script>
 </body>
 </html>
