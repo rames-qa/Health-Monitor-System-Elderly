@@ -33,6 +33,25 @@
             overflow-x: hidden;
         }
 
+        .gps-box {
+            width: 85%;
+            margin: 20px auto;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .gps-box button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
         /* --- NAVBAR --- */
         nav {
             background: rgba(0, 43, 143, 0.95);
@@ -88,7 +107,6 @@
             border-radius: 50px;
             font-weight: 700;
             cursor: pointer;
-            transition: var(--transition);
         }
 
         /* --- HERO --- */
@@ -106,23 +124,16 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
         }
 
-        .hero-image-container {
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
         .hero img {
             width: 100%;
             height: 450px;
             object-fit: cover;
-            transition: transform 0.5s ease;
         }
 
         .hero h1 {
             font-size: 48px;
             color: var(--secondary);
             margin-bottom: 24px;
-            line-height: 1.1;
             font-weight: 800;
         }
 
@@ -133,13 +144,10 @@
             padding: 18px 35px;
             border-radius: 50px;
             font-size: 18px;
-            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(46, 92, 255, 0.3);
-            transition: var(--transition);
         }
 
-        /* --- SECTIONS & CARDS --- */
+        /* --- SECTIONS --- */
         .section {
             width: 85%;
             max-width: 1200px;
@@ -150,19 +158,6 @@
             font-size: 32px;
             margin-bottom: 40px;
             color: var(--secondary);
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
         }
 
         .cards {
@@ -175,14 +170,7 @@
             background: var(--white);
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.02);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
         }
 
         .card-img-wrapper {
@@ -200,10 +188,9 @@
             padding: 30px;
         }
 
-        /* --- STATS BOXES --- */
+        /* --- STATS --- */
         .info {
             width: 85%;
-            max-width: 1200px;
             margin: 80px auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -215,16 +202,13 @@
             padding: 40px 20px;
             border-radius: 24px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
         }
 
         .box h2 {
             color: var(--primary);
             font-size: 42px;
-            margin-bottom: 8px;
         }
 
-        /* --- FOOTER --- */
         footer {
             margin-top: 100px;
             background: var(--secondary);
@@ -233,178 +217,113 @@
             padding: 50px 20px;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes pulse-red {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
-        }
-
-        @keyframes dash {
-            from { stroke-dashoffset: 100; }
-            to { stroke-dashoffset: 0; }
-        }
-
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE FIX --- */
         @media (max-width: 992px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-            }
-
-            .section-title {
-                text-align: center;
-            }
-
-            .section-title::after {
-                left: 50%;
-                transform: translateX(-50%);
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- NAVBAR -->
-    <nav>
-        <div class="logo">
-            <span class="icon">🩺</span>
-          Smart Health Monitoring Platform For Elderly
-        </div>
 
-        <div class="menu">
-            <a href="#">Home</a>
-            <a href="#">Monitoring</a>
-            <a href="#">Doctors</a>
-            <a href="#">Emergency</a>
-            <button class="login-btn">Login</button>
-        </div>
-    </nav>
+<!-- GPS -->
+<div class="gps-box">
+    <h3>📍 Live Location Tracking</h3>
+    <p id="locationText">Detecting location...</p>
+    <button onclick="getLocation()">Get My Location</button>
+</div>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-image-container">
-            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="healthcare">
-        </div>
+<!-- NAV -->
+<nav>
+    <div class="logo">
+        <span class="icon">🩺</span>
+        Smart Health Monitoring Platform For Elderly
+    </div>
 
-        <div>
-            <h1>Smart Ways To Monitor Elderly Health</h1>
-            <p>
-                Real-time heart monitoring, emergency alerts, and AI-based health prediction — all in one intelligent system.
-            </p>
-            <button onclick="window.location.href='#services'">Explore Care System →</button>
-        </div>
-    </section>
+    <div class="menu">
+        <a href="#">Home</a>
+        <a href="#">Monitoring</a>
+        <a href="#">Doctors</a>
+        <a href="#">Emergency</a>
+        <button class="login-btn">Login</button>
+    </div>
+</nav>
 
-    <!-- FEATURES -->
-    <section class="section" id="services">
-        <h2 class="section-title">Health Monitoring Services</h2>
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop">
+    </div>
 
-        <div class="cards">
+    <div>
+        <h1>Smart Ways To Monitor Elderly Health</h1>
+        <p>Real-time heart monitoring, emergency alerts, and AI-based health prediction.</p>
+        <button onclick="window.location.href='#services'">Explore Care System →</button>
+    </div>
+</section>
 
-            <!-- ENHANCED HEART MONITORING CARD -->
-            <div class="card" style="cursor: pointer; border: 2px solid rgba(46, 92, 255, 0.1);" onclick="window.open('https://www.narayanahealth.org/bangalore/cardiac-surgery-adult/dr-devi-prasad-shetty', '_blank')">
-                <div class="card-img-wrapper" style="position: relative; background: #000;">
-                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="Heart Monitoring" style="opacity: 0.8;">
+<!-- SERVICES -->
+<section class="section" id="services">
+    <h2 class="section-title">Health Monitoring Services</h2>
 
-                    <div style="position: absolute; top: 15px; left: 15px; background: #ff0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 6px; animation: pulse-red 2s infinite;">
-                        <span style="width: 8px; height: 8px; background: white; border-radius: 50%;"></span>
-                        LIVE MONITORING
-                    </div>
-                </div>
+    <div class="cards">
 
-                <div class="card-content">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <h3 style="margin: 0;"> 🫀 Heart Rate</h3>
-                        <span style="font-size: 24px; font-weight: bold; color: #2e5cff; font-family: monospace;">
-                            72 <small style="font-size: 14px;">BPM</small>
-                        </span>
-                    </div>
-
-                    <div style="width: 100%; height: 40px; background: #f0f4ff; border-radius: 8px; overflow: hidden; margin-bottom: 15px; display: flex; align-items: center; padding: 0 10px;">
-                        <svg viewBox="0 0 100 20" style="width: 100%; height: 100%;">
-                            <polyline fill="none" stroke="#2e5cff" stroke-width="2" points="0,10 10,10 15,2 20,18 25,10 40,10 45,2 50,18 55,10 70,10 75,2 80,18 85,10 100,10" style="stroke-dasharray: 100; stroke-dashoffset: 100; animation: dash 2s linear infinite;" />
-                        </svg>
-                    </div>
-
-                    <p style="font-size: 14px; color: #666;">
-                        AI analyzing rhythm. Stable.
-                        <strong>Touch to consult Dr. Devi Shetty.</strong>
-                    </p>
-                </div>
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1584515933487-779824d29309">
             </div>
-
-            <!-- EMERGENCY ALERTS -->
-            <div class="card" style="cursor: pointer;" onclick="triggerEmergency()">
-                <div class="card-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop" alt="Emergency Alerts">
-                </div>
-
-                <div class="card-content">
-                    <h3>🚨 Emergency Alerts</h3>
-                    <p>Automatic family and hospital notification during critical conditions, minimizing response time.</p>
-                </div>
+            <div class="card-content">
+                <h3>🫀 Heart Rate</h3>
+                <p>Live AI monitoring system</p>
             </div>
+        </div>
 
-            <!-- DOCTOR CONNECT -->
-            <div class="card" style="cursor: pointer;" onclick="window.open('https://www.apollohospitals.com/region/bangalore/top-cardiologists-cardiac-surgeons-in-bangalore/', '_blank')">
-                <div class="card-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop" alt="Doctor Connect">
-                </div>
-
-                <div class="card-content">
-                    <h3>🩺 Doctor Connect</h3>
-                    <p>Connect instantly with doctors and share live patient vitals remotely via our secure link.</p>
-                </div>
+        <div class="card" onclick="triggerEmergency()">
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67">
             </div>
-
-        </div>
-    </section>
-
-    <!-- STATS -->
-    <section class="info">
-        <div class="box">
-            <h2>24/7</h2>
-            <p>Monitoring</p>
+            <div class="card-content">
+                <h3>🚨 Emergency Alerts</h3>
+                <p>Instant SOS system</p>
+            </div>
         </div>
 
-        <div class="box">
-            <h2>98%</h2>
-            <p>Accuracy</p>
-        </div>
+    </div>
+</section>
 
-        <div class="box">
-            <h2>500+</h2>
-            <p>Doctors</p>
-        </div>
+<!-- STATUS -->
+<div class="info">
+    <div class="box"><h2>24/7</h2><p>Monitoring</p></div>
+    <div class="box"><h2>98%</h2><p>Accuracy</p></div>
+    <div class="box"><h2>500+</h2><p>Doctors</p></div>
+    <div class="box"><h2>10K+</h2><p>Users</p></div>
+</div>
 
-        <div class="box">
-            <h2>10K+</h2>
-            <p>Users</p>
-        </div>
-    </section>
+<footer>
+    Smart Health Monitoring Platform For Elderly
+</footer>
 
-    <footer>
-        <strong>Smart Health Monitoring Platform For Elderly</strong>
-        <p style="margin-top: 15px;">© 2026 Caring for our seniors with AI intelligence.</p>
-    </footer>
+<script>
+function triggerEmergency() {
+    if (confirm("Send Emergency Alert?")) {
+        alert("SOS SENT Successfully!");
+    }
+}
 
-    <script>
-        function triggerEmergency() {
-            const confirmAlert = confirm(
-                "EMERGENCY DETECTED! Would you like to send your live location and vitals to the nearest hospital and emergency contacts?"
-            );
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+            document.getElementById("locationText").innerHTML =
+                "Lat: " + pos.coords.latitude + "<br>Lng: " + pos.coords.longitude;
+        });
+    } else {
+        alert("GPS not supported");
+    }
+}
+</script>
 
-            if (confirmAlert) {
-                alert(
-                    "🚨 SOS SENT!\n" +
-                    "- Emergency services notified.\n" +
-                    "- Dr. Devi Shetty alerted.\n" +
-                    "- Family contacts pinged.\n" +
-                    "- Live tracking active."
-                );
-            }
-        }
-    </script>
 </body>
 </html>
