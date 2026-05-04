@@ -56,7 +56,9 @@
             font-weight: 800;
         }
 
-        .icon { font-size: 32px; }
+        .icon {
+            font-size: 32px;
+        }
 
         .menu {
             display: flex;
@@ -194,7 +196,9 @@
             object-fit: cover;
         }
 
-        .card-content { padding: 30px; }
+        .card-content {
+            padding: 30px;
+        }
 
         /* --- STATS BOXES --- */
         .info {
@@ -214,7 +218,11 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
         }
 
-        .box h2 { color: var(--primary); font-size: 42px; margin-bottom: 8px; }
+        .box h2 {
+            color: var(--primary);
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
 
         /* --- FOOTER --- */
         footer {
@@ -239,9 +247,19 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .section-title { text-align: center; }
-            .section-title::after { left: 50%; transform: translateX(-50%); }
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .section-title {
+                text-align: center;
+            }
+
+            .section-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
     </style>
 </head>
@@ -251,8 +269,9 @@
     <nav>
         <div class="logo">
             <span class="icon">🩺</span>
-            Smart Health Platform
+          Smart Health Monitoring Platform For Elderly
         </div>
+
         <div class="menu">
             <a href="#">Home</a>
             <a href="#">Monitoring</a>
@@ -267,9 +286,12 @@
         <div class="hero-image-container">
             <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="healthcare">
         </div>
+
         <div>
             <h1>Smart Ways To Monitor Elderly Health</h1>
-            <p>Real-time heart monitoring, emergency alerts, and AI-based health prediction — all in one intelligent system.</p>
+            <p>
+                Real-time heart monitoring, emergency alerts, and AI-based health prediction — all in one intelligent system.
+            </p>
             <button onclick="window.location.href='#services'">Explore Care System →</button>
         </div>
     </section>
@@ -277,81 +299,112 @@
     <!-- FEATURES -->
     <section class="section" id="services">
         <h2 class="section-title">Health Monitoring Services</h2>
+
         <div class="cards">
-            
+
             <!-- ENHANCED HEART MONITORING CARD -->
             <div class="card" style="cursor: pointer; border: 2px solid rgba(46, 92, 255, 0.1);" onclick="window.open('https://www.narayanahealth.org/bangalore/cardiac-surgery-adult/dr-devi-prasad-shetty', '_blank')">
                 <div class="card-img-wrapper" style="position: relative; background: #000;">
                     <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" alt="Heart Monitoring" style="opacity: 0.8;">
+
                     <div style="position: absolute; top: 15px; left: 15px; background: #ff0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 6px; animation: pulse-red 2s infinite;">
-                        <span style="width: 8px; height: 8px; background: white; border-radius: 50%;"></span> LIVE MONITORING
+                        <span style="width: 8px; height: 8px; background: white; border-radius: 50%;"></span>
+                        LIVE MONITORING
                     </div>
                 </div>
+
                 <div class="card-content">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <h3 style="margin: 0;">❤️ Heart Rate</h3>
-                        <span style="font-size: 24px; font-weight: bold; color: #2e5cff; font-family: monospace;">72 <small style="font-size: 14px;">BPM</small></span>
+                        <h3 style="margin: 0;"> 🫀 Heart Rate</h3>
+                        <span style="font-size: 24px; font-weight: bold; color: #2e5cff; font-family: monospace;">
+                            72 <small style="font-size: 14px;">BPM</small>
+                        </span>
                     </div>
+
                     <div style="width: 100%; height: 40px; background: #f0f4ff; border-radius: 8px; overflow: hidden; margin-bottom: 15px; display: flex; align-items: center; padding: 0 10px;">
                         <svg viewBox="0 0 100 20" style="width: 100%; height: 100%;">
-                            <polyline fill="none" stroke="#2e5cff" stroke-width="2" points="0,10 10,10 15,2 20,18 25,10 40,10 45,2 50,18 55,10 70,10 75,2 80,18 85,10 100,10" style="stroke-dasharray: 100; stroke-dashoffset: 100; animation: dash 2s linear infinite;"/>
+                            <polyline fill="none" stroke="#2e5cff" stroke-width="2" points="0,10 10,10 15,2 20,18 25,10 40,10 45,2 50,18 55,10 70,10 75,2 80,18 85,10 100,10" style="stroke-dasharray: 100; stroke-dashoffset: 100; animation: dash 2s linear infinite;" />
                         </svg>
                     </div>
-                    <p style="font-size: 14px; color: #666;">AI analyzing rhythm. Stable. <strong>Touch to consult Dr. Devi Shetty.</strong></p>
+
+                    <p style="font-size: 14px; color: #666;">
+                        AI analyzing rhythm. Stable.
+                        <strong>Touch to consult Dr. Devi Shetty.</strong>
+                    </p>
                 </div>
             </div>
 
             <!-- EMERGENCY ALERTS -->
-            <div class="card">
+            <div class="card" style="cursor: pointer;" onclick="triggerEmergency()">
                 <div class="card-img-wrapper">
                     <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop" alt="Emergency Alerts">
                 </div>
-              <script>
-    function triggerEmergency() {
-        // Simple visual feedback
-        const confirmAlert = confirm(
-            "EMERGENCY DETECTED! Would you like to send your live location and vitals to the nearest hospital and emergency contacts?"
-        );
 
-        if (confirmAlert) {
-            alert(
-                "🚨 SOS SENT!\n" +
-                "- Emergency services notified.\n" +
-                "- Dr. Devi Shetty alerted.\n" +
-                "- Family contacts pinged.\n" +
-                "- Live tracking active."
-            );
-
-            // You could also redirect to a maps link or emergency dialer
-            // window.location.href = "tel:108";
-        }
-    }
-</script>
+                <div class="card-content">
+                    <h3>🚨 Emergency Alerts</h3>
+                    <p>Automatic family and hospital notification during critical conditions, minimizing response time.</p>
+                </div>
+            </div>
 
             <!-- DOCTOR CONNECT -->
-            <div class="card" style="cursor:pointer;" onclick="window.open('https://www.apollohospitals.com/region/bangalore/top-cardiologists-cardiac-surgeons-in-bangalore/', '_blank')">
+            <div class="card" style="cursor: pointer;" onclick="window.open('https://www.apollohospitals.com/region/bangalore/top-cardiologists-cardiac-surgeons-in-bangalore/', '_blank')">
                 <div class="card-img-wrapper">
                     <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop" alt="Doctor Connect">
                 </div>
+
                 <div class="card-content">
                     <h3>🩺 Doctor Connect</h3>
                     <p>Connect instantly with doctors and share live patient vitals remotely via our secure link.</p>
                 </div>
             </div>
+
         </div>
     </section>
 
     <!-- STATS -->
     <section class="info">
-        <div class="box"><h2>24/7</h2><p>Monitoring</p></div>
-        <div class="box"><h2>98%</h2><p>Accuracy</p></div>
-        <div class="box"><h2>500+</h2><p>Doctors</p></div>
-        <div class="box"><h2>10K+</h2><p>Users</p></div>
+        <div class="box">
+            <h2>24/7</h2>
+            <p>Monitoring</p>
+        </div>
+
+        <div class="box">
+            <h2>98%</h2>
+            <p>Accuracy</p>
+        </div>
+
+        <div class="box">
+            <h2>500+</h2>
+            <p>Doctors</p>
+        </div>
+
+        <div class="box">
+            <h2>10K+</h2>
+            <p>Users</p>
+        </div>
     </section>
 
     <footer>
         <strong>Smart Health Monitoring Platform For Elderly</strong>
         <p style="margin-top: 15px;">© 2026 Caring for our seniors with AI intelligence.</p>
     </footer>
+
+    <script>
+        function triggerEmergency() {
+            const confirmAlert = confirm(
+                "EMERGENCY DETECTED! Would you like to send your live location and vitals to the nearest hospital and emergency contacts?"
+            );
+
+            if (confirmAlert) {
+                alert(
+                    "🚨 SOS SENT!\n" +
+                    "- Emergency services notified.\n" +
+                    "- Dr. Devi Shetty alerted.\n" +
+                    "- Family contacts pinged.\n" +
+                    "- Live tracking active."
+                );
+            }
+        }
+    </script>
 </body>
 </html>
