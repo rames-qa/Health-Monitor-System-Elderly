@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Health Monitoring Platform</title>
 
     <style>
@@ -18,277 +18,284 @@
             --transition: all 0.3s ease;
         }
 
-        /* --- GLOBAL SMOOTH SCROLL --- */
+        /* --- GLOBAL RESET & SMOOTH SCROLL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         html { scroll-behavior: smooth; }
+        body { background: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
 
         /* --- LOGIN MODAL STYLES --- */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-            backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center;
+            z-index: 2000; backdrop-filter: blur(5px);
         }
-
         .modal-content {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
+            background: var(--white); padding: 40px; border-radius: 24px;
+            width: 90%; max-width: 400px; text-align: center; position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
-
-        .login-form input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        /* --- GLOBAL STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-
-        body { background: var(--bg-light); color: var(--text-dark); overflow-x: hidden; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text-muted); }
+        .login-form input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .submit-login { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: var(--transition); }
 
         /* --- NAVIGATION --- */
         nav {
-            background: var(--secondary);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: rgba(0, 43, 143, 0.95); backdrop-filter: blur(10px);
+            color: white; display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 8%; position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 800; }
+        .menu { display: flex; gap: 30px; align-items: center; }
+        .menu a { color: white; text-decoration: none; font-size: 15px; font-weight: 500; transition: var(--transition); opacity: 0.9; }
+        .menu a:hover { color: var(--accent); opacity: 1; }
+        .login-btn { background: var(--white); color: var(--secondary); border: none; padding: 10px 24px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: var(--transition); }
 
-        .logo { font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
-        
-        .menu { display: flex; gap: 20px; align-items: center; }
-        .menu a { color: white; text-decoration: none; font-weight: 500; font-size: 14px; }
-        
-        /* Mobile Menu Toggle */
-        .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+        /* --- GPS BOX --- */
+        .gps-box { width: 85%; max-width: 1200px; margin: 20px auto; background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .gps-box button { margin-top: 10px; padding: 10px 20px; border: none; background: var(--primary); color: white; border-radius: 8px; cursor: pointer; }
 
-        .login-btn {
-            background: var(--white);
-            color: var(--secondary);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* --- SECTIONS --- */
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-
+        /* --- HERO SECTION --- */
         .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            padding: 60px 0;
+            width: 85%; max-width: 1200px; margin: 60px auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            align-items: center; background: var(--white); padding: 50px;
+            border-radius: 30px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            scroll-margin-top: 120px;
         }
+        .hero img { width: 100%; height: 450px; object-fit: cover; border-radius: 20px; }
+        .hero h1 { font-size: 48px; color: var(--secondary); margin-bottom: 24px; font-weight: 800; }
+        .hero button { border: none; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 18px 35px; border-radius: 50px; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 30px rgba(46, 92, 255, 0.3); transition: var(--transition); }
 
-        .hero img { width: 100%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .hero h1 { font-size: 3rem; color: var(--secondary); line-height: 1.2; margin-bottom: 20px; }
+        /* --- SECTIONS & CARDS --- */
+        .section { width: 85%; max-width: 1200px; margin: 80px auto; scroll-margin-top: 100px; }
+        .section-title { font-size: 32px; margin-bottom: 40px; color: var(--secondary); position: relative; padding-bottom: 10px; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: var(--primary); border-radius: 2px; }
+        
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .card { background: var(--white); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition: var(--transition); border: 1px solid rgba(0, 0, 0, 0.02); }
+        .card:hover { transform: translateY(-10px); }
+        .card-img-wrapper { height: 220px; overflow: hidden; position: relative; }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+        .card-content { padding: 30px; }
 
-        .section { padding: 80px 0; scroll-margin-top: 80px; }
-        .section-title { font-size: 2rem; margin-bottom: 30px; color: var(--secondary); }
-
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-content { padding: 20px; }
-
+        /* --- EMERGENCY STATUS --- */
         .status-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
-        .status-card { background: var(--white); padding: 20px; border-radius: 15px; text-align: center; }
+        .status-card { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-        /* Stats Grid */
-        .info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 40px 0; }
-        .box { background: var(--white); padding: 30px; border-radius: 20px; text-align: center; }
-        .box h2 { color: var(--primary); font-size: 2.5rem; }
+        /* --- STATS & COUNTERS --- */
+        .info { width: 85%; max-width: 1200px; margin: 80px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .box { background: var(--white); padding: 40px 20px; border-radius: 24px; text-align: center; }
+        .box h2 { color: var(--primary); font-size: 42px; margin-bottom: 8px; }
 
-        footer { background: var(--secondary); color: white; padding: 40px 0; text-align: center; }
+        /* --- SEARCH --- */
+        #doctorSearch { padding: 12px 20px; border-radius: 50px; border: 1px solid #ddd; width: 350px; max-width: 100%; margin-bottom: 20px; }
 
-        /* --- MOBILE RESPONSIVE (DIMENTIONS) --- */
-        @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; text-align: center; padding: 40px 0; }
-            .hero h1 { font-size: 2.2rem; }
-            
-            .menu {
-                display: none; /* Hide standard menu */
-                flex-direction: column;
-                position: absolute;
-                top: 60px; left: 0;
-                width: 100%;
-                background: var(--secondary);
-                padding: 20px;
-                gap: 15px;
-            }
-            .menu.active { display: flex; }
-            .menu-toggle { display: block; }
-            
-            .section { padding: 40px 0; }
-            .section-title { font-size: 1.6rem; }
-            
-            .box h2 { font-size: 2rem; }
-        }
-
+        /* --- ANIMATIONS --- */
         @keyframes pulse-red {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
         }
+        @keyframes dash { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+
+        @media (max-width: 992px) { .hero { grid-template-columns: 1fr; text-align: center; } .menu { display: none; } }
     </style>
 </head>
 <body>
 
-    <!-- MODAL -->
+    <!-- SECURE LOGIN MODAL -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-content">
-            <h2>Secure Login</h2>
-            <form class="login-form" onsubmit="event.preventDefault(); alert('Logged in!');">
-                <input type="email" placeholder="Email" required>
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 style="color: var(--secondary); margin-bottom: 10px;">Secure Login</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Access your personal health data</p>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <input type="email" placeholder="Email Address" required>
                 <input type="password" placeholder="Password" required>
-                <button type="submit" style="width:100%; padding:10px; background:var(--primary); color:white; border:none; border-radius:5px;">Login</button>
+                <button type="submit" class="submit-login">Login to Dashboard</button>
             </form>
-            <p onclick="document.getElementById('loginModal').style.display='none'" style="margin-top:15px; cursor:pointer; color:red;">Close</p>
         </div>
     </div>
 
-    <!-- NAVIGATION -->
+    <!-- GPS LOCATION TRACKER -->
+    <div class="gps-box">
+        <h3>📍 Live Location Tracking</h3>
+        <p id="locationText">Detecting location...</p>
+        <button onclick="getLocation()">Refresh My Location</button>
+    </div>
+
+    <!-- NAVIGATION BAR -->
     <nav>
-        <div class="logo">🩺 SmartHealth</div>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        <div class="menu" id="navMenu">
+        <div class="logo">🩺 Smart Health Monitoring Platform</div>
+        <div class="menu">
             <a href="#home">Home</a>
             <a href="#services">Monitoring</a>
             <a href="#doctors">Doctors</a>
             <a href="#emergency">Emergency</a>
-            <button class="login-btn" onclick="document.getElementById('loginModal').style.display='flex'">Login</button>
+            <button class="login-btn" id="loginBtn">Login</button>
         </div>
     </nav>
 
-    <div class="container">
-        <!-- HERO -->
-        <section class="hero" id="home">
-            <div>
-                <h1>Smart Ways To Monitor Elderly Health</h1>
-                <p>Real-time heart monitoring and AI-based health prediction — available 24/7 on any device.</p>
-                <button onclick="document.getElementById('services').scrollIntoView()" style="margin-top:20px; padding:15px 30px; background:var(--primary); color:white; border:none; border-radius:50px; cursor:pointer; font-weight:bold;">Get Started →</button>
-            </div>
-            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600" alt="Health App">
-        </section>
-
-        <!-- STATS -->
-        <section class="info">
-            <div class="box"><h2 class="counter" data-target="24">0</h2><p>Monitoring</p></div>
-            <div class="box"><h2 class="counter" data-target="98">0</h2><p>% Accuracy</p></div>
-            <div class="box"><h2 class="counter" data-target="500">0</h2><p>Doctors</p></div>
-            <div class="box"><h2 class="counter" data-target="10000">0</h2><p>Users</p></div>
-        </section>
-
-        <!-- SERVICES -->
-        <section class="section" id="services">
-            <h2 class="section-title">Monitoring Services</h2>
-            <div class="cards">
-                <div class="card">
-                    <div style="position:relative;">
-                        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=400">
-                        <div style="position:absolute; top:10px; left:10px; background:red; color:white; padding:5px 10px; border-radius:20px; font-size:10px; animation: pulse-red 2s infinite;">LIVE</div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Heart Rate: <span id="bpmDisplay" style="color:var(--primary)">72</span> BPM</h3>
-                        <p>Real-time ECG analysis and rhythm detection.</p>
-                    </div>
-                </div>
-                <div class="card" onclick="alert('SOS Alert Triggered!')">
-                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=400">
-                    <div class="card-content">
-                        <h3>SOS Emergency</h3>
-                        <p>One-tap emergency response for paramedics.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- DOCTORS -->
-        <section class="section" id="doctors">
-            <h2 class="section-title">Specialist Directory</h2>
-            <input type="text" id="docSearch" onkeyup="filterDocs()" placeholder="Search (e.g. Heart, Bone)..." style="width:100%; padding:15px; margin-bottom:20px; border-radius:10px; border:1px solid #ddd;">
-            <div class="cards" id="docGrid">
-                <div class="card doc-item" data-tag="heart cardiology">
-                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400">
-                    <div class="card-content">
-                        <h4>Dr. Devi Shetty</h4>
-                        <p>Cardiology Specialist</p>
-                    </div>
-                </div>
-                <div class="card doc-item" data-tag="brain neurology">
-                    <img src="https://images.unsplash.com/photo-1559839734-2b71f1539127?auto=format&fit=crop&w=400">
-                    <div class="card-content">
-                        <h4>Dr. Alok Sharma</h4>
-                        <p>Neurology Specialist</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p><strong>Smart Health Monitoring Platform</strong></p>
-            <p>© 2026 Ramesh Kumar K | Professional Elderly Care</p>
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="healthcare">
+        <div>
+            <h1>Smart Healthcare Monitoring System</h1>
+            <p>Real-time heart monitoring, emergency alerts, and AI-based health prediction — all in one intelligent system.</p>
+            <button onclick="document.getElementById('services').scrollIntoView()">Explore Care System →</button>
         </div>
+    </section>
+
+    <!-- HEALTH SERVICES SECTION -->
+    <section class="section" id="services">
+        <h2 class="section-title">Health Monitoring Services</h2>
+        <div class="cards">
+            <!-- LIVE HEART RATE CARD -->
+            <div class="card" style="cursor: pointer; border: 2px solid rgba(46, 92, 255, 0.1);" onclick="window.open('https://www.narayanahealth.org', '_blank')">
+                <div class="card-img-wrapper" style="background: #000;">
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1200&auto=format&fit=crop" style="opacity: 0.8;">
+                    <div style="position: absolute; top: 15px; left: 15px; background: #ff0000; color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 6px; animation: pulse-red 2s infinite;">
+                        LIVE MONITORING
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3>🫀 Heart Rate</h3>
+                        <span id="bpmDisplay" style="font-size: 24px; font-weight: bold; color: var(--primary); font-family: monospace;">72 <small>BPM</small></span>
+                    </div>
+                    <div style="width: 100%; height: 40px; background: #f0f4ff; border-radius: 8px; overflow: hidden; margin-bottom: 15px; padding: 0 10px; display: flex; align-items: center;">
+                        <svg viewBox="0 0 100 20" style="width: 100%; height: 100%;">
+                            <polyline fill="none" stroke="#2e5cff" stroke-width="2" points="0,10 10,10 15,2 20,18 25,10 40,10 45,2 50,18 55,10 70,10 75,2 80,18 85,10 100,10" style="stroke-dasharray: 100; stroke-dashoffset: 100; animation: dash 2s linear infinite;" />
+                        </svg>
+                    </div>
+                    <p style="font-size: 14px; color: #666;">AI analyzing rhythm. Consult <strong>Dr. Devi Shetty</strong> if fluctuations occur.</p>
+                </div>
+            </div>
+
+            <!-- EMERGENCY ALERTS CARD -->
+            <div class="card" onclick="triggerEmergency()" style="cursor: pointer;">
+                <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop"></div>
+                <div class="card-content"><h3>🚨 Emergency Alerts</h3><p>Automatic hospital notification during critical conditions.</p></div>
+            </div>
+
+            <!-- DOCTOR CONNECT CARD -->
+            <div class="card" onclick="window.open('https://www.apollohospitals.com', '_blank')" style="cursor: pointer;">
+                <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop"></div>
+                <div class="card-content"><h3>🩺 Doctor Connect</h3><p>Connect instantly with specialists and share patient vitals.</p></div>
+            </div>
+        </div>
+
+        <!-- EMERGENCY STATUS -->
+        <div class="status-container" id="emergency">
+            <div class="status-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/maps/search/hospitals+near+me', '_blank')">
+                <h3>🏥 Nearby Diagnostics</h3>
+                <p>Labs auto-detected: <strong>4 Centres Found</strong></p>
+                <p style="color: green;">🟢 System Active</p>
+            </div>
+            <div class="status-card" onclick="triggerEmergency()" style="cursor: pointer;">
+                <h3>🚑 SOS Services</h3>
+                <p>Direct link to emergency response.</p>
+                <p style="color: #d32f2f; font-weight: bold;">🟢 SOS Ready</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIALIST DIRECTORY SECTION -->
+    <section class="section" id="doctors">
+        <h2 class="section-title">Recommended Specialists</h2>
+        <input type="text" id="doctorSearch" placeholder="Search by specialty (e.g. Heart)..." onkeyup="filterDoctors()">
+        <div class="cards" id="doctorGrid">
+            <div class="card doc-card" data-specialty="heart cardiology surgery">
+                <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=400"></div>
+                <div class="card-content">
+                    <h3>Dr. Devi Shetty</h3>
+                    <p>Chief Cardiac Surgeon - Available for remote vitals review.</p>
+                    <button class="submit-login" onclick="triggerEmergency()">Emergency Consult</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DYNAMIC COUNTERS SECTION -->
+    <section class="info">
+        <div class="box"><h2 class="counter" data-target="24">0</h2><p>24/7 Monitoring</p></div>
+        <div class="box"><h2 class="counter" data-target="98">0</h2><p>% Accuracy</p></div>
+        <div class="box"><h2 class="counter" data-target="500">0</h2><p>Doctors</p></div>
+        <div class="box"><h2 class="counter" data-target="10000">0</h2><p>Active Users</p></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <strong>Smart Health Monitoring Platform</strong>
+        <p style="margin-top: 15px;">© Rameshkumar K 2026. Empowering elderly care through automation and AI.</p>
     </footer>
 
     <script>
-        // Toggle Mobile Menu
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('active');
-        }
+        // MODAL LOGIC
+        const modal = document.getElementById("loginModal");
+        const btn = document.getElementById("loginBtn");
+        const span = document.getElementById("closeModal");
+        btn.onclick = () => modal.style.display = "flex";
+        span.onclick = () => modal.style.display = "none";
+        window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; }
 
-        // Heart Rate Simulation
-        setInterval(() => {
-            document.getElementById('bpmDisplay').innerText = Math.floor(Math.random() * (80 - 65) + 65);
-        }, 3000);
+        function handleLogin(e) { e.preventDefault(); alert("Login Successful! Accessing secure data..."); modal.style.display = "none"; }
 
-        // Counter Animation
-        const counters = document.querySelectorAll('.counter');
-        counters.forEach(c => {
-            const target = +c.getAttribute('data-target');
-            let count = 0;
-            const inc = target / 50;
-            const update = () => {
-                if(count < target) {
-                    count += inc;
-                    c.innerText = Math.ceil(count) + (target === 98 ? "%" : target >= 500 ? "+" : "");
-                    if(target === 24) c.innerText = "24/7";
-                    setTimeout(update, 30);
-                }
-            };
-            update();
-        });
-
-        // Doctor Filter
-        function filterDocs() {
-            let input = document.getElementById('docSearch').value.toLowerCase();
-            let items = document.querySelectorAll('.doc-item');
-            items.forEach(item => {
-                let tag = item.getAttribute('data-tag');
-                item.style.display = tag.includes(input) ? "block" : "none";
+        // COUNTER LOGIC
+        function startCounters() {
+            document.querySelectorAll('.counter').forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const updateCount = () => {
+                    const count = +counter.innerText.replace(/[^0-9]/g, '');
+                    const inc = target / 80;
+                    if (count < target) {
+                        const val = Math.ceil(count + inc);
+                        if (target === 98) counter.innerText = val + "%";
+                        else if (target === 24) counter.innerText = "24/7";
+                        else if (target === 500) counter.innerText = val + "+";
+                        else if (target === 10000) counter.innerText = "10K+";
+                        else counter.innerText = val;
+                        setTimeout(updateCount, 30);
+                    }
+                };
+                updateCount();
             });
         }
+
+        // GPS & HEART RATE LOGIC
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    document.getElementById("locationText").innerHTML = `Lat: ${pos.coords.latitude.toFixed(4)} | Lon: ${pos.coords.longitude.toFixed(4)}`;
+                }, () => { document.getElementById("locationText").innerHTML = "Location: Bangalore Hub (Default)"; });
+            }
+        }
+
+        function triggerEmergency() {
+            if (confirm("🚨 EMERGENCY DETECTED! Send SOS to paramedics and notify Dr. Devi Shetty?")) {
+                alert("SOS SENT! Tracking your current location now.");
+            }
+        }
+
+        function animateHeart() {
+            setInterval(() => {
+                const rate = Math.floor(Math.random() * (78 - 68 + 1)) + 68;
+                document.getElementById("bpmDisplay").innerHTML = `${rate} <small>BPM</small>`;
+            }, 3000);
+        }
+
+        function filterDoctors() {
+            const input = document.getElementById('doctorSearch').value.toLowerCase();
+            document.querySelectorAll('.doc-card').forEach(card => {
+                const specialty = card.getAttribute('data-specialty');
+                card.style.display = specialty.includes(input) ? "" : "none";
+            });
+        }
+
+        window.onload = () => { animateHeart(); startCounters(); getLocation(); };
     </script>
 </body>
 </html>
