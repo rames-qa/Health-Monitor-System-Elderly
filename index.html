@@ -260,25 +260,35 @@
         </div>
 
         <!-- STATUS CONTAINER -->
-        <div class="status-container">
-            <div class="status-card location">
-                <h3>📍 Location Tracking</h3>
-                <p><strong>City:</strong> Bangalore, Karnataka</p>
-                <p class="active">🟢 Enabled & Active</p>
-            </div>
-            <div class="status-card diagnostics">
-                <h3>🏥 Diagnostics System</h3>
-                <p>Nearby labs auto-detected</p>
-                <p class="active">🟢 4 Centres Found</p>
-            </div>
-            <div class="status-card emergency">
-                <h3>🚑 Emergency Services</h3>
-                <p>Linked to Bangalore hospitals</p>
-                <p class="active">🟢 SOS Ready</p>
-            </div>
-        </div>
-    </section>
+<div class="status-container">
+    <!-- LOCATION CARD -->
+    <div class="status-card location" 
+         style="cursor: pointer; border: 1px solid transparent;" 
+         onclick="window.open('https://www.google.com/maps/search/?api=1&query=current+location', '_blank')">
+        <h3>📍 Location Tracking</h3>
+        <p><strong>City:</strong> Bangalore, Karnataka</p>
+        <p class="active">🟢 Enabled & Active</p>
+    </div>
 
+    <!-- DIAGNOSTICS CARD -->
+    <div class="status-card diagnostics" 
+         style="cursor: pointer; border: 1px solid transparent;" 
+         onclick="window.open('https://www.google.com/maps/search/diagnostic+centers+near+Bangalore', '_blank')">
+        <h3>🏥 Diagnostics System</h3>
+        <p>Nearby labs auto-detected</p>
+        <p class="active">🟢 4 Centres Found</p>
+    </div>
+
+    <!-- EMERGENCY CARD -->
+    <div class="status-card emergency" 
+         style="cursor: pointer; border: 1px solid rgba(255, 0, 0, 0.1);" 
+         onclick="window.open('https://www.google.com/maps/search/emergency+hospitals+in+Bangalore', '_blank')">
+        <h3>🚑 Emergency Services</h3>
+        <p>Linked to Bangalore hospitals</p>
+        <p class="active" style="color: #d32f2f; font-weight: bold;">🟢 SOS Ready</p>
+    </div>
+</div>
+</section>
     <!-- STATS -->
     <section class="info">
         <div class="box"><h2>24/7</h2><p>Monitoring</p></div>
