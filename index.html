@@ -217,46 +217,6 @@
         </div>
     </div>
 
-   // --- UPDATED GPS LOGIC WITH ERROR HANDLING ---
-function getLocation() {
-    const locText = document.getElementById("locationText");
-    locText.innerHTML = "Requesting access...";
-
-    if (navigator.geolocation) {
-        const options = {
-            enableHighAccuracy: true,
-            timeout: 8000, // Wait up to 8 seconds
-            maximumAge: 0
-        };
-        navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-    } else {
-        locText.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    document.getElementById("locationText").innerHTML =
-        "Lat: " + position.coords.latitude.toFixed(4) + " | Lon: " + position.coords.longitude.toFixed(4);
-}
-
-function showError(error) {
-    const locText = document.getElementById("locationText");
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            locText.innerHTML = "Access Denied: Please allow location in browser settings.";
-            break;
-        case error.POSITION_UNAVAILABLE:
-            locText.innerHTML = "Location unavailable. Check your network.";
-            break;
-        case error.TIMEOUT:
-            locText.innerHTML = "Request timed out. Try again.";
-            break;
-        default:
-            locText.innerHTML = "An unknown error occurred.";
-            break;
-    }
-}
-
     <!-- NAVBAR -->
     <nav>
         <div class="logo">
