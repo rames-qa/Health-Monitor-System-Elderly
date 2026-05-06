@@ -26,7 +26,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            display: none; /* Hidden by default */
+            display: none; 
             justify-content: center;
             align-items: center;
             z-index: 2000;
@@ -203,7 +203,7 @@
 </head>
 <body>
 
-    <!-- LOGIN MODAL (Added Feature) -->
+    <!-- LOGIN MODAL -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
@@ -217,14 +217,14 @@
         </div>
     </div>
 
-    <!-- GPS LOCATION (Original) -->
+    <!-- GPS LOCATION -->
     <div class="gps-box">
         <h3>📍 Live Location Tracking</h3>
         <p id="locationText">Detecting location...</p>
         <button onclick="getLocation()">Get My Location</button>
     </div>
 
-    <!-- NAVBAR (Original with functional Login) -->
+    <!-- NAVBAR -->
     <nav>
         <div class="logo">
             <span class="icon">🩺</span>
@@ -232,14 +232,14 @@
         </div>
         <div class="menu">
             <a href="#">Home</a>
-            <a href="#">Monitoring</a>
-            <a href="#">Doctors</a>
-            <a href="#">Emergency</a>
+            <a href="#services">Monitoring</a>
+            <a href="#services">Doctors</a>
+            <a href="#services">Emergency</a>
             <button class="login-btn" id="loginBtn">Login</button>
         </div>
     </nav>
 
-    <!-- HERO (Original) -->
+    <!-- HERO -->
     <section class="hero">
         <div class="hero-image-container">
             <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="healthcare">
@@ -251,7 +251,7 @@
         </div>
     </section>
 
-    <!-- FEATURES (Original) -->
+    <!-- FEATURES -->
     <section class="section" id="services">
         <h2 class="section-title">Health Monitoring Services</h2>
         <div class="cards">
@@ -284,14 +284,17 @@
                 <div class="card-content"><h3>🚨 Emergency Alerts</h3><p>Automatic family and hospital notification during critical conditions.</p></div>
             </div>
 
-            <!-- DOCTOR CONNECT -->
-            <div class="card" style="cursor: pointer;" onclick="window.open('https://www.apollohospitals.com/region/bangalore/top-cardiologists-cardiac-surgeons-in-bangalore/', '_blank')">
+            <!-- MODIFIED DOCTOR CONNECT -->
+            <div class="card" style="cursor: pointer;" onclick="window.open('https://www.apollohospitals.com/bangalore/specialities/cardiology/', '_blank')">
                 <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1580281657527-47f249e8f4df?q=80&w=1200&auto=format&fit=crop"></div>
-                <div class="card-content"><h3>🩺 Doctor Connect</h3><p>Connect instantly with specialists and share live patient vitals.</p></div>
+                <div class="card-content">
+                    <h3>🩺 Specialist Network</h3>
+                    <p>Direct portal to <strong>Apollo</strong> and <strong>Manipal</strong> cardiac specialists. Share live vitals instantly.</p>
+                </div>
             </div>
         </div>
 
-        <!-- STATUS CONTAINER (Original) -->
+        <!-- STATUS CONTAINER -->
         <div class="status-container">
             <div class="status-card" style="cursor: pointer;" onclick="window.open('https://www.google.com/maps/search/?api=1&query=current+location', '_blank')">
                 <h3>📍 Location Tracking</h3>
@@ -311,7 +314,7 @@
         </div>
     </section>
 
-    <!-- STATS (Original) -->
+    <!-- STATS -->
     <section class="info">
         <div class="box"><h2>24/7</h2><p>Monitoring</p></div>
         <div class="box"><h2>98%</h2><p>Accuracy</p></div>
@@ -321,7 +324,7 @@
 
     <footer>
         <strong>Smart Health Monitoring Platform</strong>
-        <p style="margin-top: 15px;">© Rameshkumar K 2026 Caring for our seniors with AI intelligence.</p>
+        <p style="margin-top: 15px;">© Ramesh Kumar K 2026 Caring for our seniors with AI intelligence.</p>
     </footer>
 
     <script>
@@ -340,10 +343,10 @@
             modal.style.display = "none";
         }
 
-        // --- ORIGINAL GPS & MONITORING LOGIC ---
+        // --- GPS & MONITORING LOGIC ---
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, () => {
+                navigator.geolocation.getCurrentPosition(showPosition, (error) => {
                     document.getElementById("locationText").innerHTML = "Location access denied";
                 });
             }
@@ -356,7 +359,7 @@
 
         function triggerEmergency() {
             if (confirm("EMERGENCY DETECTED! Send SOS?")) {
-                alert("🚨 SOS SENT!\n- Services notified.\n- Dr. Devi Shetty alerted.");
+                alert("🚨 SOS SENT!\n- Emergency Services notified.\n- Bangalore Central Dispatch alerted.");
             }
         }
 
@@ -364,7 +367,7 @@
             const bpm = document.getElementById("bpmDisplay");
             setInterval(() => {
                 const rate = Math.floor(Math.random() * (78 - 68 + 1)) + 68;
-                bpm.innerHTML = `${rate} <small style="font-size: 14px;">BPM</small>`;
+                if(bpm) bpm.innerHTML = `${rate} <small style="font-size: 14px;">BPM</small>`;
             }, 3000);
         }
 
